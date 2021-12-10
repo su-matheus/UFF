@@ -1,0 +1,6 @@
+tomada1=int(input())
+tomada2=int(input())
+tomada3=int(input())
+tomada4=int(input())
+total=((tomada1-1)+(tomada2-1)+(tomada3-1)+tomada4)
+print(total)
