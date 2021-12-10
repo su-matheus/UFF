@@ -1,3 +1,6 @@
+#Faça um programa que leia dois pontos num espaço bidimensional e calcule a distância entre esses pontos
+#ENTRADA: quatro números reais representando as 2 coordenadas (x,y) dos pontos 
+
 x1=float(input())
 y1=float(input())
 x2=float(input())
