@@ -11,4 +11,4 @@ if i * (i+1) * (i+2) == número:
 else:
     print("%d não" %(número))
 
-#ENTREGUE COM 66.6 PORCENTO DE ACERTO
+#ENTREGUE COM 66.6 PORCENTO DE ACERTO 
