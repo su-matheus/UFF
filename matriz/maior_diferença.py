@@ -2,27 +2,27 @@
 #ENTRADA: inteiros N>=2 e M>=2 (pode acreditar) seguidos por N*M inteiros que irão compor a matriz (primeiros M elementos são a primeira linha, os próximos M elementos são a segunda, ...)
 #SAIDA: matriz de inteiros transformada (formato padrão do python)
 
-N=int(input())
-M=int(input())
+nLinhas=int(input())
+nColunas=int(input())
 matriz=[]
 
-for i in range(N):
+for i in range(nLinhas):
     linha=[]
-    for j in range(M):
+    for j in range(nColunas):
         linha.append(int(input()))
     matriz.append(linha)
 
 maiorElemento=[0][0]
 
-for i in range(N):
-    for j in range(M):
+for i in range(nLinhas):
+    for j in range(nColunas):
         if matriz[i][j] > maiorElemento:
             maiorElemento = matriz[i][j]
 
-for i in range(N):
-    for j in range(M):
+for i in range(nLinhas):
+    for j in range(nColunas):
         matriz[i][j] = matriz[i][j] - maiorElemento
 
 print(matriz)
 
-#ENTREGUE COM 66.6 PORCENTO DE ACERTO
+# ENTREGUE COM 66.6 PORCENTO DE ACERTO
