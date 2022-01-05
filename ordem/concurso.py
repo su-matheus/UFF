@@ -13,10 +13,10 @@ for i in range(N):
 
 
 for i in range(len(n)):
-    n[i] = m[i]
     for j in range(len(n)-1):
         if n[j] > n[j+1]:
             n[j] , n[j+1] = n[j+1] , n[j]
+            m[j] , m[j+1] = m[j+1] , m[j]
 
 #for i in range(len(n)):
 #    i = m[i]
