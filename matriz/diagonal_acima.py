@@ -3,18 +3,32 @@
 #SAIDA: dois números inteiros representando a soma dos elementos acima da diagonal principal e o número de células da matriz que têm valor menor que a média dos valores das células da matriz.
 
 N=int(input())
-matriz=[]
+matriz = []
 
 for i in range(N):
-    linha=[]
+    linha = []
     for j in range(N):
         linha.append(int(input()))
     matriz.append(linha)
 
-média=0
+#SOMA DOS ELEMENTOS ACIMA DA DIAGONAL PRINCIPAL
+soma1 = 0
+for i in range(N):
+    for j in range(i+1,N):
+        soma1 += matriz[i][j]
 
-for i in range(N-1):
-    #diagonalPrincipal = matriz[i][i]
-    soma=0
-    soma=soma+matriz[i][N-i-1]
-print(soma)
+#MÉDIA DOS ELEMENTOS DA MATRIZ
+somaTotal = 0
+for i in range(N):
+    for j in range(N):
+        somaTotal += matriz[i][j]
+    média = somaTotal/(N*N)
+
+#ELEMENTOS MENORES QUE A MÉDIA TOTAL
+menorMédia=0
+for i in range(N):
+    for j in range(N):
+        if matriz[i][j] < média:
+            menorMédia += 1
+
+print(soma1 , menorMédia , sep="\n")
