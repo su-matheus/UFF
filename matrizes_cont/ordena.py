@@ -6,14 +6,31 @@ nLinhas=int(input())
 nColunas=int(input())
 matriz=[]
 
+#MATRIZ PRINCIPAL
 for i in range(nLinhas):
     linha=[]
     for j in range(nColunas):
         linha.append(int(input()))
     matriz.append(linha)
 
-maiorElemento=matriz[0][0]
+#MATRIZ TEMPORARIA
+tamanho = nLinhas*nColunas
+vetorTemp = [0]*tamanho
+ind=0
 for i in range(nLinhas):
     for j in range(nColunas):
-        maiorElemento=matriz[i][j]
-        
+        vetorTemp[ind] = matriz[i][j]
+        ind+= 1
+
+#ORDENA MATRIZ TEMPORARIA
+for i in range(tamanho):
+    for j in range(tamanho-1):
+        if vetorTemp[j] < vetorTemp[j+1]:
+            vetorTemp[j] , vetorTemp[j+1] = vetorTemp[j+1] , vetorTemp[j]
+
+ind=0
+for i in range(nLinhas):
+    for j in range(nColunas-1-j):
+        matriz[i][j+1] = vetorTemp[ind]
+        ind     = ind+1
+print(matriz)
