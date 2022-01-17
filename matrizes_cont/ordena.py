@@ -29,7 +29,7 @@ for i in range(tamanho):
             vetorTemp[j] , vetorTemp[j+1] = vetorTemp[j+1] , vetorTemp[j]
 
 ind=0
-for i in range(nLinhas):
+for i in range(nLinhas-1):
     for j in range(nColunas-1-j):
         matriz[i][j+1] = vetorTemp[ind]
         ind     = ind+1
