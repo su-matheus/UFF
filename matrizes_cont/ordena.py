@@ -21,7 +21,15 @@ for i in range(nLinhas):
         vetorTemp[ind] = matriz[i][j]
         ind+= 1
 
-for i in range(tamanhoVetorTemp-1):
-    if vetorTemp[i] < vetorTemp[i+1]:
-        vetorTemp[i] , vetorTemp[i+1] = vetorTemp[i+1] , vetorTemp[i]
-print(vetorTemp)
+#ORDENA MATRIZ TEMPORARIA
+for i in range(tamanho):
+    for j in range(tamanho-1):
+        if vetorTemp[j] < vetorTemp[j+1]:
+            vetorTemp[j] , vetorTemp[j+1] = vetorTemp[j+1] , vetorTemp[j]
+
+ind=0
+for i in range(nLinhas-1):
+    for j in range(nColunas-1-j):
+        matriz[ind][j+1] = vetorTemp[ind]
+        ind+= 1
+print(matriz)
