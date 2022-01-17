@@ -12,8 +12,16 @@ for i in range(nLinhas):
         linha.append(int(input()))
     matriz.append(linha)
 
-maiorElemento=matriz[0][0]
+tamanhoVetorTemp = nLinhas*nColunas
+vetorTemp = [0]*tamanhoVetorTemp
+ind = 0
+
 for i in range(nLinhas):
     for j in range(nColunas):
-        maiorElemento=matriz[i][j]
-        
+        vetorTemp[ind] = matriz[i][j]
+        ind+= 1
+
+for i in range(tamanhoVetorTemp-1):
+    if vetorTemp[i] < vetorTemp[i+1]:
+        vetorTemp[i] , vetorTemp[i+1] = vetorTemp[i+1] , vetorTemp[i]
+print(vetorTemp)
