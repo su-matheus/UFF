@@ -34,3 +34,6 @@ for i in range(nColunas):
         matriz[j][i] = vetorTemp[ind]
         ind+= 1
 print(matriz)
+
+
+#100% CORRETO
