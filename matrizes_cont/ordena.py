@@ -6,16 +6,17 @@ nLinhas=int(input())
 nColunas=int(input())
 matriz=[]
 
+#MATRIZ PRINCIPAL
 for i in range(nLinhas):
     linha=[]
     for j in range(nColunas):
         linha.append(int(input()))
     matriz.append(linha)
 
-tamanhoVetorTemp = nLinhas*nColunas
-vetorTemp = [0]*tamanhoVetorTemp
-ind = 0
-
+#MATRIZ TEMPORARIA
+tamanho = nLinhas*nColunas
+vetorTemp = [0]*tamanho
+ind=0
 for i in range(nLinhas):
     for j in range(nColunas):
         vetorTemp[ind] = matriz[i][j]
@@ -28,8 +29,8 @@ for i in range(tamanho):
             vetorTemp[j] , vetorTemp[j+1] = vetorTemp[j+1] , vetorTemp[j]
 
 ind=0
-for i in range(nLinhas-1):
-    for j in range(nColunas-1-j):
-        matriz[ind][j+1] = vetorTemp[ind]
+for i in range(nColunas):
+    for j in range(nLinhas):
+        matriz[j][i] = vetorTemp[ind]
         ind+= 1
 print(matriz)
