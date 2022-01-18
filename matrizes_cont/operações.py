@@ -43,4 +43,4 @@ for i in range(N):
 print(somaMatriz)
 
 
-#33,3% CERTO
+#33,3% CORRETO
