@@ -10,3 +10,12 @@ for i in range(N):
     for j in range(N):
         linha.append(int(input()))
     matriz.append(linha)
+
+limitadorSuperior = 1
+limitadorInferior = 1
+matrizPintada = [0]
+
+for i in range(N//2):
+    for j in range(j+1,j-1):
+        matrizPintada.append(matriz[i][j])
+print(matrizPintada)
