@@ -14,8 +14,8 @@ for i in range(N):
 limitadorSuperior = 1
 limitadorInferior = 1
 
-for i in range(N//2):
-    matrizPintada = [0]
-    for j in range(j+1,j-1):
-        matrizPintada.append()
+matrizPintada = []
+for i in range(0,N//2):
+    for j in range(j+1,N-j-1):
+        matrizPintada[i][j] = matriz[i][j]
 print(matrizPintada)
