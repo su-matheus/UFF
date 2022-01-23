@@ -3,12 +3,11 @@
 #SAIDA: N inteiros, um por linha, representando o número de trocas em cada vetor, respectivamente. 
 
 N=int(input())
-v=([0]*5)*N
+v=([0]*5)
 t=0
 
-for i in range(N):
-    for j in range(5):
-        v[j]=int(input())
+for i in range(5):
+        v[i]=int(input())
 
 for i in range(len(v)):
     for j in range(len(v)-1):
