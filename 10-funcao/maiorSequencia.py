@@ -14,3 +14,6 @@ for i in range(tamanhoLista):
 sequencia = decrescente(lista)
 
 print(sequencia)
+
+
+#FUNCIONANDO, MAS O RUNCODES NÃO ACEITA
