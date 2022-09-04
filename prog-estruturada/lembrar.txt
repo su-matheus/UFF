@@ -1,0 +1,3 @@
+antes de começar a realizar a lista de exercícios estudar o tamanho de cada tipo para poder usar nos programas.
+não há necessidade de usar sempre int e float, talvez seja possível realizar os exercícios somente com short int, por exemplo.
+Após isso calcular o tempo de execução de cada programa.
