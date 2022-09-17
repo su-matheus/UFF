@@ -26,8 +26,8 @@ bola.y = janela_jogo.height/2 - bola.height/2
 #velocidade_bola_x = random.uniform(0.4, 0.7) #(a variação da velocidade da bola nesse eixo deve ser até  0.5)
 #velocidade_bola_y = random.uniform(0.6, 1.3) #(a variação da velocidade da bola nesse eixo deve ser até 1)
 
-velocidade_bola_x = random.uniform(0.5, 0.7)
-velocidade_bola_y = random.uniform(0.6, 1.1)
+velocidade_bola_x = random.uniform(0.6, 0.8)
+velocidade_bola_y = random.uniform(0.6, 1.2)
 
 
 
@@ -110,16 +110,22 @@ while (True):
         bola.y = janela_jogo.height/2 - bola.height/2
         placar_direito += 1
 
-        print("Pontuação do jogador direito: {}".format(placar_direito))
-        print("Pontuação do jogador esquerdo: {}".format(placar_esquerdo))
+        velocidade_bola_x = random.uniform(0.6, 0.8)
+        velocidade_bola_y = random.uniform(0.6, 1.2)
+
+        print("velocidade da bola em y: {}".format(velocidade_bola_y))
+        print("velocidade da bola em x: {}".format(velocidade_bola_x))
 
     if ((bola.x + bola.width) > janela_jogo.width):
         bola.x = janela_jogo.width/2 - bola.width/2
         bola.y = janela_jogo.height/2 - bola.height/2
         placar_esquerdo += 1
         
-        print("Pontuação do jogador direito: {}".format(placar_direito))
-        print("Pontuação do jogador esquerdo: {}".format(placar_esquerdo))
+        velocidade_bola_x = random.uniform(0.6, 0.8)
+        velocidade_bola_y = random.uniform(0.6, 1.2)
+
+        print("velocidade da bola em y: {}".format(velocidade_bola_y))
+        print("velocidade da bola em x: {}".format(velocidade_bola_x))
 
 
 
@@ -130,7 +136,9 @@ while (True):
     bola.draw()
     jogador_direita.draw()
     jogador_esquerda.draw()
+    janela_jogo.draw_text("Score Player One: " + str(placar_esquerdo), janela_jogo.width/16, 25, size=24, color=("green"), font_name="Verdana", bold=False, italic=True)
+    janela_jogo.draw_text("Score Player Two: " + str(placar_direito), janela_jogo.width - (janela_jogo.width/3), 25, size=24, color=("green"), font_name="Verdana", bold=False, italic=True)
     janela_jogo.update()
 
 
-##sem o window_game.update() não é possível mostrar a imagem de fundo
+##sem o janela_jogo.update() não é possível mostrar a imagem de fundo
