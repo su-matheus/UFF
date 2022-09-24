@@ -28,7 +28,8 @@ bola.y = janela_jogo.height/2 - bola.height/2
 
 velocidade_bola_x = random.uniform(0.6, 0.8)
 velocidade_bola_y = random.uniform(0.6, 1.2)
-
+velocidade_segunda_bola_x = random.uniform(0.6, 0.8)
+velocidade_segunda_bola_y = random.uniform(0.6, 1.2)
 
 
 #### posição do jogador ####
@@ -55,7 +56,7 @@ print("velocidade da bola em x: {}".format(velocidade_bola_x))
 
 while (True):
 
-    #### movimentação da bola ####
+    #### movimentação da bola principal ####
     bola.x += velocidade_bola_x * janela_jogo.delta_time()
     bola.y += velocidade_bola_y * janela_jogo.delta_time()
 
@@ -84,13 +85,15 @@ while (True):
 
 
 
-    #### movimentação do jogador esquerdo ####
+    #### movimentação da IA ####
 
-    if (teclado.key_pressed("w") and jogador_esquerda.y >= 0):
-        jogador_esquerda.y = jogador_esquerda.y - velocidade_jogador_esquerda * janela_jogo.delta_time()
+    if (bola.y > jogador_esquerda.y):
+        if (jogador_esquerda.y <= janela_jogo.height -jogador_esquerda.height):
+            jogador_esquerda.y = jogador_esquerda.y + velocidade_jogador_esquerda * janela_jogo.delta_time()
 
-    if (teclado.key_pressed("s") and jogador_esquerda.y + jogador_esquerda.height <= janela_jogo.height):
-        jogador_esquerda.y = jogador_esquerda.y + velocidade_jogador_esquerda * janela_jogo.delta_time()
+    if (bola.y < jogador_esquerda.y):
+        if (jogador_esquerda.y >= 0):
+            jogador_esquerda.y = jogador_esquerda.y - velocidade_jogador_esquerda * janela_jogo.delta_time()
 
 
 
