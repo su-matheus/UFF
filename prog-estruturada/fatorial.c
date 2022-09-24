@@ -17,5 +17,5 @@ int main(void) {
     resultado = fat(numero);
     printf("Fatorial de %d é %d. \n", numero, resultado);
 
-    return 0;
+    return 0; //Se tudo estiver correto retorna 0, se algo estiver errado retorna 1
 }
