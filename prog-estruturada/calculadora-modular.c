@@ -45,3 +45,8 @@ int main (void){
         
     return 0;
 }
+
+/*
+Criei as funções depois da função main() e as declarei antes mesmo da função main(), porém não funcionou.
+Primeiro tenho que criar as funções antes da main(), e depois chamar as funções que eu criei dentro da main()
+*/
