@@ -11,11 +11,13 @@ int buscar(int *v, int elem) {
     for (int n =0; n < 6; n++){
         if (v[n] == elem){
             printf("%d", n);
-            return veracidade = 1;
-            break;
+            return veracidade = 0; //outro método é usar break. return também encerra o loop
+        }
+        else {
+            veracidade = 1;
         }
     }
-    if (veracidade != 0) {
+    if (veracidade == 1) {
     printf("%d", -1);
     }
 
