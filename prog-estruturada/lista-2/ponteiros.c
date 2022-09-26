@@ -2,7 +2,7 @@
 
 int main(){
     int v[10] = {1,2,3,4,5,6,7,8,9,10};
-    int *v_pt = v+2; //isso quer dizer v[0+2]
+    int *v_pt = v+2; //isso quer dizer que o array v_pt recebe *v[0+2]
     int a = 10;
     int *b = &a;
     int *c = b;

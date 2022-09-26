@@ -28,7 +28,6 @@ int main(void){
     int elem;
     printf("Digite um número inteiro positivo \n");
     scanf("%d", &elem);
-    buscar(v,elem);
-
+    buscar(v,elem); //aqui não precisa passar um ponteiro dentro, somente na função que eu crio que precisa passar como ponteiro
     return 0;
 }
