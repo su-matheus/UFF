@@ -24,7 +24,7 @@ int main(void){
         int vet[n];
 
         for(int i = 0; i < n; i++){
-            scanf("%f", &vet[i]);
+            scanf("%d", &vet[i]);
         }
 
         ord_sel_sort(vet, n);
