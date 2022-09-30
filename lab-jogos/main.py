@@ -1,4 +1,5 @@
 import random
+from PPlay import sprite
 
 from PPlay.window import *
 from PPlay.gameimage import *
@@ -15,6 +16,7 @@ imagem_fundo = GameImage("galaxy.jpg")
 jogador_direita = Sprite("right_player.png", 1)
 jogador_esquerda = Sprite("left_player.png", 1)
 bola = Sprite("ball.png", 1)
+segunda_bola = Sprite("ball.png", 1)
 
 
 #### posição da bola ####
@@ -48,6 +50,7 @@ teclado = Window.get_keyboard()
 #### pontuação ####
 placar_direito = 0
 placar_esquerdo = 0
+contador = 0
 
 
 print("velocidade da bola em y: {}".format(velocidade_bola_y))
@@ -56,22 +59,27 @@ print("velocidade da bola em x: {}".format(velocidade_bola_x))
 
 while (True):
 
-    #### movimentação da bola principal ####
+    #### movimentação da bola ####
     bola.x += velocidade_bola_x * janela_jogo.delta_time()
     bola.y += velocidade_bola_y * janela_jogo.delta_time()
 
 
-    if (bola.x > (janela_jogo.width-15)):
+    if ((bola.x > (janela_jogo.width-15)) or segunda_bola.x > (janela_jogo.width-15)):
         velocidade_bola_x *= -1
+        velocidade_segunda_bola_x *= -1
 
-    if (bola.y > (janela_jogo.height-15)):
+    if ((bola.y > (janela_jogo.height-15)) or segunda_bola.y > (janela_jogo.width-15)):
         velocidade_bola_y *= -1
+        velocidade_segunda_bola_y *= -1
 
-    if (bola.x < 0):
+    if (bola.x < 0) or segunda_bola.x < 0:
         velocidade_bola_x *= -1
+        velocidade_segunda_bola_y *= -1
 
-    if (bola.y < 0):
+
+    if (bola.y < 0) or segunda_bola.y < 0:
         velocidade_bola_y *= -1
+        velocidade_segunda_bola_y *= -1
 
     
 
@@ -101,6 +109,7 @@ while (True):
 
     if (bola.collided(jogador_direita) and velocidade_bola_x > 0):
         velocidade_bola_x *= -1
+        
 
     if (bola.collided(jogador_esquerda) and velocidade_bola_x < 0):
         velocidade_bola_x *= -1
@@ -129,6 +138,18 @@ while (True):
 
         print("velocidade da bola em y: {}".format(velocidade_bola_y))
         print("velocidade da bola em x: {}".format(velocidade_bola_x))
+
+
+    if (contador == 3):
+        segunda_bola.x = janela_jogo.width/2 - bola.width/2
+        segunda_bola.y = janela_jogo.height/2 - bola.height/2
+
+        segunda_bola.x += velocidade_segunda_bola_x * janela_jogo.delta_time()
+        segunda_bola.y += velocidade_segunda_bola_y * janela_jogo.delta_time()
+        
+        segunda_bola.x += velocidade_segunda_bola_x
+        segunda_bola.y += velocidade_segunda_bola_y
+        segunda_bola.draw()
 
 
 
