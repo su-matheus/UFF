@@ -1,32 +1,49 @@
 from PPlay.window import *
-from PPlay.gameimage import *
-from PPlay.sprite import *
+from PPlay.keyboard import *
+from display import menu, difficulty ##falta colocar play e ranking
+from display.play import Play
 
-#### configuração inicial ####
-janela_lar = 615
-janela_alt = 412
-janela = Window(janela_lar, janela_alt)
-janela.set_title("Space Invaders")
-imagem_fundo = GameImage("./assets/background-image-menu.jpg")
+import globals as glb
 
-botao_play = GameImage("./assets/Play.png")
-botao_play.set_position(janela_lar/2 - botao_play.width/2 , janela_alt/4)
+window_game = Window(glb.GAME_WIDTH, glb.GAME_HEIGHT)
+window_game.set_title(glb.GAME_TITLE)
 
-botao_dificuldade = GameImage("./assets/Difficulty.png")
-botao_dificuldade.set_position(janela_lar/2 - botao_dificuldade.width/2 , janela_alt/4 + 60)
+menu_page = menu.Menu(window_game)
+play_page = Play(window_game)
+difficulty_page = difficulty.Difficulty(window_game)
+##ranking_page = ranking.Rankiwng(window_game)
 
-botao_ranking = GameImage("./assets/Ranking.png")
-botao_ranking.set_position(janela_lar/2 - botao_dificuldade.width/2 , janela_alt/4 + 120)
+user_input = keyboard.Keyboard()
+current_game = 0##por padrão nada será mostrado na tela
 
-botao_exit = GameImage("./assets/Exit.png")
-botao_exit.set_position(janela_lar/2 - botao_dificuldade.width/2 , janela_alt/4 + 180)
+while (glb.GAME_SCREEN > 0 and glb.GAME_SCREEN < 5):##será quase sempre verdadeiro
+    window_game.set_background_color(glb.GAME_BACKGROUND_COLOR)
 
 
+    #if currGme == 0 and glb.GAME_SCREEN == 3:
+        #currGme = 3
+        #ranking_page = ranking.Ranking(window_game)
+    #elif currGme == 3 and glb.GAME_SCREEN != 3:
+        #currGme = 0
 
-while (True):
-    imagem_fundo.draw()
-    botao_play.draw()
-    botao_dificuldade.draw()    
-    botao_ranking.draw()
-    botao_exit.draw()
-    janela.update()
+    if (glb.GAME_SCREEN == 1):
+        menu_page.update()
+
+    if (glb.GAME_SCREEN == 2):
+        play_page.update()
+    
+    if (glb.GAME_SCREEN == 3):
+        difficulty_page.update()
+        
+    #if (current_game == 4):
+        #ranking_page.update()
+
+    if (user_input.key_pressed("ESC")):
+        glb.GAME_SCREEN = 1
+
+    print(glb.GAME_SCREEN)
+
+    play_page.move_player()
+    window_game.update()
+
+## Não é necessário usar posição do mouse aqui pois a tela de menu é a primeira a ser renderizada e na página de menu eu já utilizo as opções de mouse. Mesma coisa acontece na página de dificuldade
