@@ -1,7 +1,6 @@
 from PPlay.window import *
 from PPlay.keyboard import *
-from display import menu, difficulty ##falta colocar play e ranking
-from display.play import Play
+from display import menu, play, difficulty, ranking
 
 import globals as glb
 
@@ -9,7 +8,7 @@ window_game = Window(glb.GAME_WIDTH, glb.GAME_HEIGHT)
 window_game.set_title(glb.GAME_TITLE)
 
 menu_page = menu.Menu(window_game)
-play_page = Play(window_game)
+play_page = play.Play(window_game)
 difficulty_page = difficulty.Difficulty(window_game)
 ##ranking_page = ranking.Rankiwng(window_game)
 
