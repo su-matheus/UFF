@@ -2,7 +2,7 @@
 
 void ord_sel_sort(int *vet, int n) {
     for (int i = 0; i < n ; i++) {
-        int menor = i;
+        int menor = i;//no primeiro momento, o menor valor é i=0, isso é pode ser alterado enquanto percorre o for com j
         for (int j = i+1; j < n; j++) {
             if (vet[j] < vet[menor]) {
                 menor = j;
@@ -11,7 +11,7 @@ void ord_sel_sort(int *vet, int n) {
         if (menor != i) {
             int temp = vet[i];
             vet[i] = vet[menor];
-            vet[menor] = temp; //com esse loop colocará o valor de i depois do valor de j, pois i > j. Além disso garantirá que i sempre começa menor que j e somente depois de encontrar algum valor i<j que efetuará essa condição if para novamente transformar o index i menor que o index j.
+            vet[menor] = temp; //com esse loop colocará o valor de i depois do valor de j, pois i > j. Além disso garantirá que i sempre comece menor que j e somente depois de encontrar algum valor i<j que efetuará essa condição if para novamente transformar o index i menor que o index j.
         }
     }
 }
