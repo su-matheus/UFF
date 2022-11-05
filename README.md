@@ -15,12 +15,19 @@
 
 # 🤓 Laboratório de resolução de problemas
 <p>
-    Professor: Antônio Kowada
-</p>
-<p>
-    Casos realizados:
+    <h2 align="left">
+        Professor:
+    </h2>
+    <p>
+        Luiz Kowada
+    </p>
+</>
+<p align="center">
+    <h2 align="left">
+        Casos realizados:
+    </h2>
     <br>
-    <img src="./images/screencapture-beecrowd-br-judge-pt-profile-607472-2022-11-05-16_10_52.png" style="height:450px"/>
+    ![Beecrowd](./images/screencapture-beecrowd-br-judge-pt-profile-607472-2022-11-05-16_10_52.png)
 </p>
 
 <br><br>
@@ -34,13 +41,17 @@
         Esteban Walter
     </p>
 </p>
-<p>
-    <h2>
+<p align="center">
+    <h2 align="left">
         Casos realizados
     </h2>
     <br>
-    <img src="./images/pong.png" style="width:54%" align="left"/>
-    <img src="./images/space-invaders.png" style="width:45%" align="right">
+    <p align="left" style="width:54%">
+        ![Pong](./images/pong.png)
+    </p>
+    <p align="right" style="width:45%">
+        ![Space Invaders](./images/space-invaders.png)
+    </p>
 </p>
 
 <br><br>
@@ -59,6 +70,7 @@
         Casos realizados
     </h2>
     <br>
-    <img src="./images/c.png"/>
-
+    <p align="left">
+        ![C](./images/c.png)
+    </p>
 </p>
