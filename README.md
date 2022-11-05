@@ -11,7 +11,7 @@
 
 <hr>
 
-<br><br>
+<br>
 
 # 🤓 Laboratório de resolução de problemas
 <p>
@@ -19,21 +19,21 @@
         Professor:
     </h2>
     <p>
-        Luiz Kowada
+        Luiz Antonio Brasil Kowada
     </p>
-</>
+<p/>
 <p align="center">
     <h2 align="left">
         Casos realizados:
     </h2>
     <br>
-    ![Beecrowd](./images/screencapture-beecrowd-br-judge-pt-profile-607472-2022-11-05-16_10_52.png)
+    <img src="./images/screencapture-beecrowd-br-judge-pt-profile-607472-2022-11-05-16_10_52.png"/>
 </p>
 
 <br><br>
 
 # 🎮 Laboratório de jogos
-<p>
+<p align="left">
     <h2>
         Professor:
     </h2>
@@ -41,23 +41,17 @@
         Esteban Walter
     </p>
 </p>
-<p align="center">
-    <h2 align="left">
-        Casos realizados
-    </h2>
-    <br>
-    <p align="left" style="width:54%">
-        ![Pong](./images/pong.png)
-    </p>
-    <p align="right" style="width:45%">
-        ![Space Invaders](./images/space-invaders.png)
-    </p>
-</p>
+<h2 align="left">
+    Casos realizados
+</h2>
+<br>
+<img src="./images/pong.png" align="left" style="width:50%"/>
+<img src="./images/space-invaders.png" align="right" style="width:45%"/>
 
-<br><br>
+<br><br><br><br><br><br><br><br><br>
 
 # 🧬 Programação estruturada
-<p>
+<p align="left">
     <h2>
         Professor
     </h2>
@@ -71,6 +65,6 @@
     </h2>
     <br>
     <p align="left">
-        ![C](./images/c.png)
+        <img src="./images/c.png"/>
     </p>
 </p>
