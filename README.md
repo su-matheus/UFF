@@ -16,7 +16,7 @@
 # 🤓 Laboratório de resolução de problemas
 <p>
     <h2 align="left">
-        Professor:
+        Professor
     </h2>
     <p>
         Luiz Antonio Brasil Kowada
@@ -35,7 +35,7 @@
 # 🎮 Laboratório de jogos
 <p align="left">
     <h2>
-        Professor:
+        Professor
     </h2>
     <p>
         Esteban Walter
@@ -45,8 +45,10 @@
     Casos realizados
 </h2>
 <br>
-<img src="./images/pong.png" align="left" style="width:50%"/>
-<img src="./images/space-invaders.png" align="right" style="width:45%"/>
+<p>
+    <img src="./images/pong.png" align="left" style="width:50%"/>
+    <img src="./images/space-invaders.png" align="right" style="width:45%"/>
+</p>
 
 <br><br><br><br><br><br><br><br><br>
 
