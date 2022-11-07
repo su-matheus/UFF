@@ -1,4 +1,5 @@
 import pygame
+from random import randint
 
 from PPlay.window import *
 from PPlay.gameimage import *
@@ -16,6 +17,8 @@ class Play():
         self.spaceship.set_position(glb.GAME_WIDTH/2 , glb.GAME_HEIGHT-50)
 
         self.clock, self.frames, self.fps = 0, 0, "Calculando..."
+
+        self.next = True
 
         self.aliens_group = []
         self.shot_alien_group = []
@@ -59,32 +62,52 @@ class Play():
             self.shot_player_group.append(self.shot_img)
             self.last_shot_player = self.time_now
 
-
+    
     def set_alien_pos(self):
         self.alien_col = 5
         self.alien_lin = 3
+        self.next = True
         
-        
+        self.aliens_group = [[Sprite("./assets/enemy_green.png") for i in range(self.alien_col)] for j in range(self.alien_lin)]
         for i in range(self.alien_lin):
             for j in range(self.alien_col):
-                self.alien = Sprite("./assets/enemy_green.png")
-                self.alien.set_position(70 + j * 60, 30 + i * 60)
-                self.aliens_group.append(self.alien)
-                self.alien.draw()
+                self.aliens_group[i][j] = Sprite("./assets/enemy_green.png")
+                self.aliens_group[i][j].set_position(70 + j * 60, 30 + i * 60)
+                self.aliens_group[i][j].draw()
 
-        self.alien.x += (glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
+        
 
     def move_alien(self):
-        #self.move_counter += 1
+        
+        for l in range(len(self.aliens_group)):
+            for c in range(len(self.aliens_group[l])):
+                self.aliens_group[l][c].x += glb.SPEED_ENEMY * self.window_game.delta_time()
 
-        self.alien.x += (glb.SPEED_ENEMY * self.window_game.delta_time())
+                first = self.aliens_group[l][0].x
+                last = self.aliens_group[l][-1].x
+
+                if (last >= glb.GAME_WIDTH):
+                    glb.SPEED_ENEMY *= -1
+                if (first <= 0):
+                    glb.SPEED_ENEMY *= -1
+
+                self.aliens_group[l][c].draw()
+                
+
 
         """
-        if (abs(self.move_counter) > 70):
-            self.alien.x += (glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
-            self.move_counter = 0
-        else:
-            self.alien.x += (glb.SPEED_ENEMY * self.window_game.delta_time())
+        for l in range(len(self.aliens_group)):
+            first = self.aliens_group[l][0]
+            last = self.aliens_group[l][-1]
+
+            if (self.next):
+                if ((last.x + last.width) > glb.GAME_WIDTH):
+                    glb.SPEED_ENEMY *= -1
+                    self.next = not self.next
+            else:
+                if (first.x <= 0):
+                    glb.SPEED_ENEMY *= -1
+                    self.next = not self.next
         """
 
     def shot_alien(self):
@@ -100,9 +123,11 @@ class Play():
                 n -= 1
 
         if (self.time_now - self.last_shot_alien > glb.ALIEN_COOLDOWN):
+            i = randint(0, len(self.aliens_group) - 1)
+            j = randint(0 , len(self.aliens_group[i]) - 1)
             self.shot_img = Sprite("./assets/shot.png")
-            self.shot_img.x = self.alien.x + self.alien.width/2 - self.shot_img.width/2
-            self.shot_img.y = self.alien.y
+            self.shot_img.x = self.aliens_group[i][j].x + self.aliens_group[i][j].width/2 - self.shot_img.width/2
+            self.shot_img.y = self.aliens_group[i][j].y
 
             self.shot_alien_group.append(self.shot_img)
             self.last_shot_alien = self.time_now
@@ -120,8 +145,6 @@ class Play():
         self.move_alien()
         self.shot_alien()
 
-
-        # self.alien.x += glb.SPEED_ENEMY * self.window_game.delta_time()
 
         if self.clock >= 1:
             self.fps = self.frames
