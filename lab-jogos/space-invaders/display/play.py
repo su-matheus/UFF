@@ -17,6 +17,7 @@ class Play():
         self.spaceship.set_position(glb.GAME_WIDTH/2 , glb.GAME_HEIGHT-50)
 
         self.clock, self.frames, self.fps = 0, 0, "Calculando..."
+        self.points = 0
 
         self.next = True
 
@@ -62,6 +63,21 @@ class Play():
             self.shot_player_group.append(self.shot_img)
             self.last_shot_player = self.time_now
 
+
+    def player_hit_enemy(self):
+        for shot in self.shot_player_group:
+            for lin in range(len(self.aliens_group)-1, -1, -1):
+                for col in range(len(self.aliens_group[lin])):
+                    if (self.aliens_group[lin][col].collided(shot)):
+                        print("player hit enemy")
+                        print("linha {}".format(lin))
+                        print("coluna:{}".format(col))
+                        self.aliens_group[lin].pop(col)
+                        self.shot_player_group.remove(shot)
+                        self.points += 33
+                        break
+
+
     
     def set_alien_pos(self):
         self.alien_col = 5
@@ -71,9 +87,7 @@ class Play():
         self.aliens_group = [[Sprite("./assets/enemy_green.png") for i in range(self.alien_col)] for j in range(self.alien_lin)]
         for i in range(self.alien_lin):
             for j in range(self.alien_col):
-                self.aliens_group[i][j] = Sprite("./assets/enemy_green.png")
-                self.aliens_group[i][j].set_position(70 + j * 60, 30 + i * 60)
-                self.aliens_group[i][j].draw()
+                self.aliens_group[i][j].set_position(80 + j * 60, 30 + i * 60)
 
         
 
@@ -87,12 +101,12 @@ class Play():
                 last = self.aliens_group[l][-1].x
 
                 if (last >= glb.GAME_WIDTH):
-                    glb.SPEED_ENEMY *= -1
+                    self.aliens_group[l][c].x += (glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
                 if (first <= 0):
-                    glb.SPEED_ENEMY *= -1
+                    self.aliens_group[l][c].x += (glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
 
-                self.aliens_group[l][c].draw()
-                
+
+
 
 
         """
@@ -137,9 +151,12 @@ class Play():
         self.frames += 1
         self.bg_image.draw()
 
+        [[alien.draw() for alien in linha] for linha in self.aliens_group]
+
         self.spaceship.draw()
         self.move_player()
         self.shot_player()
+        self.player_hit_enemy()
 
         self.set_alien_pos()
         self.move_alien()
@@ -152,3 +169,4 @@ class Play():
             self.frames = 0
         
         self.window_game.draw_text("FPS: " + str(self.fps), 30, 50, 15, (255, 255, 255))
+        self.window_game.draw_text("Points: "+str(self.points), glb.GAME_WIDTH - 150, 50, 30, (255,255,255), "Impact")
