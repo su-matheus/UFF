@@ -13,11 +13,17 @@ class Play():
         self.window_game.set_title("Space Invaders")
 
         self.bg_image = GameImage("./assets/background-image-menu.jpg")
-        self.spaceship = Sprite("./assets/player.png")
-        self.spaceship.set_position(glb.GAME_WIDTH/2 , glb.GAME_HEIGHT-50)
 
         self.clock, self.frames, self.fps = 0, 0, "Calculando..."
         self.points = 0
+        self.life = 5
+
+        self.invisible = True
+        self.invisible_time = 0
+        self.invisible_flash = 0
+
+        self.spaceship = Sprite("./assets/player.png")
+        self.spaceship.set_position(glb.GAME_WIDTH/2 , glb.GAME_HEIGHT-50)
 
         self.next = True
         self.alien_col = 5
@@ -78,17 +84,14 @@ class Play():
             for lin in range(len(self.aliens_group)-1, -1, -1):
                 for col in range(len(self.aliens_group[lin])):
                     if (self.aliens_group[lin][col].collided(shot)):
-                        print("line {}".format(lin))
-                        print("column:{}".format(col))
-                        #self.aliens_group[lin].pop(col)
                         self.aliens_group[lin].remove(self.aliens_group[lin][col])##funciona, mas ñ apaga
                         self.shot_player_group.remove(shot)
                         self.points += 33
 
-                        self.break_row = True
                         if (len(self.aliens_group[lin]) == 0):
                             self.aliens_group.pop(lin)
-                        if (len(self.aliens_group[col]) == 0):
+                            self.break_row = True
+                        if (self.aliens_group[col] == 0):
                             self.aliens_group.pop(col)
                             self.break_col = True
 
@@ -97,16 +100,16 @@ class Play():
             if self.break_col: break
 
 
-    
-    def set_alien_pos(self):
-        self.next = True
-        
-        self.aliens_group = [[Sprite("./assets/enemy_green.png") for i in range(self.alien_col)] for j in range(self.alien_lin)]
+    def alien_hit_player(self):
+        for aliens_bullet in self.shot_alien_group:
+            if (self.spaceship.collided(aliens_bullet) and self.invisible_time <= 0):
+                self.life -= 1
+                self.shot_alien_group.remove(aliens_bullet)
+                self.spaceship.set_position(glb.GAME_WIDTH/2 , glb.GAME_HEIGHT-50)
+                self.invisible_time = 2
 
-        for i in range(self.alien_lin):
-            for j in range(self.alien_col):
-                self.aliens_group[i][j].set_position(80 + j * 60, 30 + i * 60)
-
+            if (self.life == 0):
+                self.game_over()
 
 
     def move_alien(self):
@@ -122,19 +125,6 @@ class Play():
                 if (first.x <= 0):
                     glb.SPEED_ENEMY *= -1
 
-
-        """
-
-        for lines in self.aliens_group:
-            for alien in lines:
-                alien.move_key_x(glb.SPEED_ENEMY * self.window_game.delta_time())
-
-                if (alien.x + alien.width) > glb.GAME_WIDTH:
-                    alien.move_key_x(glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
-                if (alien.x <= 0):
-                    alien.move_key_x(glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
-
-        """
                 
 
     def shot_alien(self):
@@ -159,21 +149,39 @@ class Play():
             self.shot_alien_group.append(self.shot_img)
             self.last_shot_alien = self.time_now
 
+
+    def game_over(self):
+        name = input("Insira seu nome: ")
+        with open("score.txt", 'a') as scores:
+            scores.write(f"{name}: {self.points}\n")
+            scores.close()
+        glb.GAME_SCREEN = 1
+
+
     def update(self):
         self.clock += self.window_game.delta_time()
         self.frames += 1
         self.bg_image.draw()
 
+        if self.invisible_time > 0:
+            self.invisible_flash += self.window_game.delta_time()
+            self.invisible_time -= self.window_game.delta_time()
+            if self.invisible_flash >= 0.1:
+                self.invisible_flash = 0
+                self.invisible = not self.invisible
+        if self.invisible_time <= 0 or self.invisible:
+            self.spaceship.draw()
+
+
         [[alien.draw() for alien in line] for line in self.aliens_group]
 
-        self.spaceship.draw()
         self.move_player()
         self.shot_player()
         self.player_hit_enemy()
 
-        #self.set_alien_pos()
         self.move_alien()
         self.shot_alien()
+        self.alien_hit_player()
 
 
         if self.clock >= 1:
@@ -181,5 +189,6 @@ class Play():
             self.clock = 0
             self.frames = 0
         
-        self.window_game.draw_text("FPS: " + str(self.fps), 30, 50, 15, (255, 255, 255))
-        self.window_game.draw_text("Points: "+str(self.points), glb.GAME_WIDTH - 150, 50, 30, (255,255,255), "Impact")
+        self.window_game.draw_text("FPS: " +str(self.fps), 30, 50, 15, (255, 255, 255))
+        self.window_game.draw_text("Points: " +str(self.points), glb.GAME_WIDTH - 150, 50, 30, (255,255,255), "Impact")
+        self.window_game.draw_text("Vidas: " +str(self.life), 30, 70, 30, (255, 255, 255), "Impact")
