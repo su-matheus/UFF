@@ -20,8 +20,15 @@ class Play():
         self.points = 0
 
         self.next = True
+        self.alien_col = 5
+        self.alien_lin = 3
 
-        self.aliens_group = []
+        self.aliens_group = [[Sprite("./assets/enemy_green.png") for i in range(self.alien_col)] for j in range(self.alien_lin)]
+
+        for i in range(self.alien_lin):
+            for j in range(self.alien_col):
+                self.aliens_group[i][j].set_position(80 + j * 60, 30 + i * 60)
+
         self.shot_alien_group = []
         self.last_shot_alien = pygame.time.get_ticks()
         self.move_counter = 0
@@ -65,64 +72,70 @@ class Play():
 
 
     def player_hit_enemy(self):
+        self.break_row = False
+        self.break_col = False
         for shot in self.shot_player_group:
             for lin in range(len(self.aliens_group)-1, -1, -1):
                 for col in range(len(self.aliens_group[lin])):
                     if (self.aliens_group[lin][col].collided(shot)):
-                        print("player hit enemy")
-                        print("linha {}".format(lin))
-                        print("coluna:{}".format(col))
-                        self.aliens_group[lin].pop(col)
+                        print("line {}".format(lin))
+                        print("column:{}".format(col))
+                        #self.aliens_group[lin].pop(col)
+                        self.aliens_group[lin].remove(self.aliens_group[lin][col])##funciona, mas ñ apaga
                         self.shot_player_group.remove(shot)
                         self.points += 33
+
+                        self.break_row = True
+                        if (len(self.aliens_group[lin]) == 0):
+                            self.aliens_group.pop(lin)
+                        if (len(self.aliens_group[col]) == 0):
+                            self.aliens_group.pop(col)
+                            self.break_col = True
+
                         break
+                if self.break_row: break
+            if self.break_col: break
 
 
     
     def set_alien_pos(self):
-        self.alien_col = 5
-        self.alien_lin = 3
         self.next = True
         
         self.aliens_group = [[Sprite("./assets/enemy_green.png") for i in range(self.alien_col)] for j in range(self.alien_lin)]
+
         for i in range(self.alien_lin):
             for j in range(self.alien_col):
                 self.aliens_group[i][j].set_position(80 + j * 60, 30 + i * 60)
 
-        
+
 
     def move_alien(self):
-        
         for l in range(len(self.aliens_group)):
             for c in range(len(self.aliens_group[l])):
                 self.aliens_group[l][c].x += glb.SPEED_ENEMY * self.window_game.delta_time()
 
-                first = self.aliens_group[l][0].x
-                last = self.aliens_group[l][-1].x
+                first = self.aliens_group[l][0]
+                last = self.aliens_group[l][-1]
 
-                if (last >= glb.GAME_WIDTH):
-                    self.aliens_group[l][c].x += (glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
-                if (first <= 0):
-                    self.aliens_group[l][c].x += (glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
-
-
-
-
-
-        """
-        for l in range(len(self.aliens_group)):
-            first = self.aliens_group[l][0]
-            last = self.aliens_group[l][-1]
-
-            if (self.next):
-                if ((last.x + last.width) > glb.GAME_WIDTH):
+                if (last.x + last.width >= glb.GAME_WIDTH):
                     glb.SPEED_ENEMY *= -1
-                    self.next = not self.next
-            else:
                 if (first.x <= 0):
                     glb.SPEED_ENEMY *= -1
-                    self.next = not self.next
+
+
         """
+
+        for lines in self.aliens_group:
+            for alien in lines:
+                alien.move_key_x(glb.SPEED_ENEMY * self.window_game.delta_time())
+
+                if (alien.x + alien.width) > glb.GAME_WIDTH:
+                    alien.move_key_x(glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
+                if (alien.x <= 0):
+                    alien.move_key_x(glb.SPEED_ENEMY * self.window_game.delta_time()) * -1
+
+        """
+                
 
     def shot_alien(self):
         self.time_now = pygame.time.get_ticks()
@@ -151,14 +164,14 @@ class Play():
         self.frames += 1
         self.bg_image.draw()
 
-        [[alien.draw() for alien in linha] for linha in self.aliens_group]
+        [[alien.draw() for alien in line] for line in self.aliens_group]
 
         self.spaceship.draw()
         self.move_player()
         self.shot_player()
         self.player_hit_enemy()
 
-        self.set_alien_pos()
+        #self.set_alien_pos()
         self.move_alien()
         self.shot_alien()
 
