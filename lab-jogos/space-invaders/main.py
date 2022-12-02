@@ -18,12 +18,13 @@ current_game = 0##por padrão nada será mostrado na tela
 while (glb.GAME_SCREEN > 0 and glb.GAME_SCREEN < 5):##será quase sempre verdadeiro
     window_game.set_background_color(glb.GAME_BACKGROUND_COLOR)
 
-
+    """
     if current_game == 0 and glb.GAME_SCREEN == 3:
         current_game = 3
         ranking_page = ranking.Ranking(window_game)
     elif current_game == 3 and glb.GAME_SCREEN != 3:
         current_game = 0
+    """
 
     if (glb.GAME_SCREEN == 1):
         menu_page.update()
@@ -34,7 +35,7 @@ while (glb.GAME_SCREEN > 0 and glb.GAME_SCREEN < 5):##será quase sempre verdade
     if (glb.GAME_SCREEN == 3):
         difficulty_page.update()
         
-    if (current_game == 4):
+    if (glb.GAME_SCREEN == 4):
         ranking_page.update()
 
     if (user_input.key_pressed("ESC")):
