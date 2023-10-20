@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1696520910 source:c:\users\lauro\onedrive\documentos\codeblocks\listacircular\listacircular.c
+	"listaCircular.h"
+
+1696520752 ular.h"
+
+1696518860 c:\users\lauro\onedrive\documentos\codeblocks\listacircular\listacircular.h
+	<stdio.h>
+	<stdlib.h>
+
+1696518860 
+
+1696520752 source:c:\users\lauro\onedrive\documentos\codeblocks\listacircular\main.c
+	"listaCircular.h"
+
+1696850972 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADListaCircular/ListaCircular.c
+	"listaCircular.h"
+
+1696856706 /home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADListaCircular/listaCircular.h
+	<stdio.h>
+	<stdlib.h>
+
+1696857081 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADListaCircular/main.c
+	"listaCircular.h"
+

@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1697738731 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/chat-gpt/merge-sort/merge-sort/main.c
+	<stdio.h>
+	<string.h>
+

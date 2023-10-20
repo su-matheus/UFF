@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1697377907 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/Code-Blocks-Pilha-Encadeada/TADpilhaLE/main.c
+	"Pilha.h"
+
+1696199923 /home/matheusfelipe/Code/uff/ProgramacaoEstruturada/Code-Blocks-Pilha-Encadeada/TADpilhaLE/Pilha.h
+	<stdio.h>
+	<stdlib.h>
+

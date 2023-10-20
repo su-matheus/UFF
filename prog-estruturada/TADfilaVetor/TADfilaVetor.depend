@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1695735757 source:c:\users\lauro\onedrive\documentos\codeblocks\tadfilavetor\fila.c
+	"Fila.h"
+
+1695739644 
+
+1695739644 c:\users\lauro\onedrive\documentos\codeblocks\tadfilavetor\fila.h
+	<stdio.h>
+	<stdlib.h>
+
+1695739749 source:c:\users\lauro\onedrive\documentos\codeblocks\tadfilavetor\main.c
+	"Fila.h"
+
+1695743818 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADfilaVetor/Fila.c
+	"Fila.h"
+
+1697299923 /home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADfilaVetor/Fila.h
+	<stdio.h>
+	<stdlib.h>
+
+1697299867 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADfilaVetor/main.c
+	"Fila.h"
+

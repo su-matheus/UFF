@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1697376623 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/Code-Blocks-Fila/main.c
+	"Fila.h"
+
+1697375984 /home/matheusfelipe/Code/uff/ProgramacaoEstruturada/Code-Blocks-Fila/Fila.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1697377815 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/Code-Blocks-Fila/Fila.c
+	"Fila.h"
+

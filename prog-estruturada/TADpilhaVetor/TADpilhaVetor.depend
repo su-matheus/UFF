@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1694703983 source:c:\users\lauro\onedrive\documentos\codeblocks\tadpilhavetor\main.c
+	"Pilha.h"
+
+1694703635 
+
+1694704139 c:\users\lauro\onedrive\documentos\codeblocks\tadpilhavetor\pilha.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1694703635 source:c:\users\lauro\onedrive\documentos\codeblocks\tadpilhavetor\pilha.c
+	"Pilha.h"
+
+1695039798 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADpilhaVetor/main.c
+	"Pilha.h"
+
+1695160617 /home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADpilhaVetor/Pilha.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+
+1695039716 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/TADpilhaVetor/Pilha.c
+	"Pilha.h"
+

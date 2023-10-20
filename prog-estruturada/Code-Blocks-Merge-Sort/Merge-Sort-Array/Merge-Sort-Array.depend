@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1697745575 source:/home/matheusfelipe/Code/uff/ProgramacaoEstruturada/Code-Blocks-Merge-Sort/Merge-Sort-Array/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
