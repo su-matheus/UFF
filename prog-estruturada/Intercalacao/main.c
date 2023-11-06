@@ -14,7 +14,7 @@ typedef struct aluno {
 #define MAIOR 1
 #define IGUAL 0
 
-typedef int (*funcaoComparacao)(Tipo, Tipo) ; // pense para que serve isso?
+//typedef int (*funcaoComparacao)(Tipo, Tipo) ; // pense para que serve isso?
 void mergeSort(Tipo *vet, int a, int b); // prototipo da função
 
 /* // para comparar numeros inteiros
@@ -51,6 +51,14 @@ void merge(Tipo *vet, int a, int m, int b){
         if (compara(vet[esq], vet[dir]) == MENOR){
             vetAux[iAux] = vet[esq];
             iAux++; esq++;
+        } else {
+            vetAux[iAux] = vet[dir];
+            iAux++; dir++;
+        }
+            /*
+        if (compara(vet[esq], vet[dir]) == MENOR){
+            vetAux[iAux] = vet[esq];
+            iAux++; esq++;
         } else if (compara(vet[esq], vet[dir]) == MAIOR){
             vetAux[iAux] = vet[dir];
             iAux++; dir++;
@@ -60,6 +68,7 @@ void merge(Tipo *vet, int a, int m, int b){
             vetAux[iAux] = vet[esq]; // copia os dois
             iAux++; esq++;
         }
+        */
     }
     // o que sobrou à esquerda
     while (esq <= m){
@@ -80,6 +89,19 @@ void merge(Tipo *vet, int a, int m, int b){
 typedef int logico;
 #define TRUE 1
 #define FALSE 0
+
+void mergeSort(Tipo *vet, int a, int b){
+    if (a<b){
+        int m = a + (b-a)/2;
+
+        mergeSort(vet, a, m);
+        mergeSort(vet, m+1, b);
+
+        merge(vet, a,m,b);
+    }
+}
+
+
 
 void bubbleSort(Tipo vet[], int tamanho){
     // ordenando crescentemente
@@ -108,7 +130,7 @@ int main(){
     //*/
     //*
     Tipo vet[] = {
-        {"Juliana", 100, {8,9}}, // nome. cpf e notas AV1 e AV2
+        {"Juliana", 100, {8,9}},
         {"Ze", 101, {7,9}},
         {"Ana", 201, {8,10}},
         {"Bia", 202, {10,9}},
@@ -131,33 +153,3 @@ int main(){
     printf("\nacabou\n");
     return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void mergeSort(Tipo *vet, int a, int b){
-    if (a<b){
-        int m = a + (b-a)/2;
-        mergeSort(vet, a, m);
-        mergeSort(vet, m+1, b);
-        merge(vet, a,m,b);
-    }
-}
-

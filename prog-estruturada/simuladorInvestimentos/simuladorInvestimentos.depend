@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1696336129 source:c:\users\lauro\onedrive\documentos\codeblocks\simuladorinvestimentos\main.c
+	<stdio.h>
+	<stdlib.h>
+
