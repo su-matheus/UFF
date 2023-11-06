@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1699224042 source:/home/matheusfelipe/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/main.c
+	"conjunto.h"
+
+1699224093 /home/matheusfelipe/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/conjunto.h
+	<stdio.h>
+	<stdlib.h>
+
