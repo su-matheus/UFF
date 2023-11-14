@@ -58,7 +58,7 @@
         Professor
     </h2>
     <p>
-        Anselmo Antunes
+        Lauro Eduardo Kozovits
     </p>
 </p>
 <p>
