@@ -1,8 +1,8 @@
-#include "sets.h"
+#include "conjunto.h"
 
 typedef struct node {
     Tipo e;
-    struct node * next;
+    struct node *next;
 } Node;
 
 #define MAX_SETS ('Z'-'A'+1)
@@ -17,7 +17,7 @@ Result comparador(Tipo e1, Tipo e2){
 }
 
 
-int mapa(char c){ // funcao interna para mapear caracter para indice do vetor de listas
+int mapa(char c){
     if (c >= 'A' && c <= 'Z')
         return (int) (c - 'A');
     return -1; // indice invalido
@@ -46,8 +46,8 @@ Logic setsPrint(char letra, funcaoDeForaQueImprime imprime){
         printf("]->");
         p1 = p1->next;
     }
-    printf("NULL  ");
-    imprime(setsNumberOfElements(p1));
+    printf("NULL");
+    //imprime(setsNumberOfElements(p1));
     printf("\n");
     return TRUE;
 }
@@ -55,7 +55,6 @@ Logic setsPrint(char letra, funcaoDeForaQueImprime imprime){
 
 Logic setsAddElement(char c1, Tipo e){
     int ix = mapa(c1);
-    if (ix < 0) return FALSE;
     Node *pInicio = vetListas[ix];
 
     if (pInicio == NULL){
@@ -71,15 +70,15 @@ Logic setsAddElement(char c1, Tipo e){
     Node *pAnterior = NULL;
 
     while (pInicio != NULL){
-        //Result r = compareTo(e, pInicio->e);
         Result r = comparador(e, pInicio->e);
         if ( r == LT){
             Node *aux = (Node *) malloc(sizeof(Node));
-            aux->next = NULL;
+            //aux->next = NULL;
             aux->e = e;
             if (pAnterior == NULL){
                 // primeiro da lista
-                aux->next = vetListas[ix];
+                //aux->next = vetListas[ix];//proximo recebe NULL, pois era o primeiro do conjunto
+                aux->next = pInicio;
                 vetListas[ix] = aux;
                 return TRUE;
             }
@@ -90,7 +89,7 @@ Logic setsAddElement(char c1, Tipo e){
         pAnterior = pInicio;
         pInicio = pInicio->next;
     }
-    // se chegou aqui, a lista que não era vazia e o elemento é maior que todos que existiam
+    // se chegou aqui, a lista não era vazia e o elemento é maior que todos que existiam
     Node *aux = (Node *) malloc(sizeof(Node));
     aux->next = NULL;
     aux->e = e;
@@ -99,16 +98,17 @@ Logic setsAddElement(char c1, Tipo e){
 }
 
 
-//NÃO FUNCIONA
-Logic setsNumberOfElements(char conj){
+Logic setsNumberOfElements(char conj, int *total){
     int indexConj = mapa(conj);
-    int count = 0;
+    //if(indexConj < 0) return FALSE;
+
     Node *pAux = vetListas[indexConj];
+    *total = 0;
 
     if(pAux == NULL) return FALSE;
 
     while(pAux != NULL){
-        count++;
+        *total ++;
         pAux = pAux->next;
     }
     return TRUE;
@@ -121,12 +121,18 @@ Logic setsBelongsTo(char conj, Tipo e){
 
     if (pAux == NULL) return FALSE;
 
+    /*
     while(pAux->e != e){
         pAux = pAux->next;
         if(pAux == NULL) return FALSE;
     }
-
-    if(pAux->e == e) return TRUE;
+    return TRUE;
+    */
+    while(pAux != NULL){
+        if (pAux->e == e) return TRUE;
+        pAux = pAux->next;
+    }
+    return FALSE;
 }
 
 
@@ -217,10 +223,10 @@ Logic setsIntersection(char conj1, char conj2, char conj3){
     Node *pConj1 = vetListas[indexConj1];
     Node *pConj2 = vetListas[indexConj2];
 
+    setsFreeSet(conj3);
     while(pConj1 != NULL && pConj2 != NULL){
         Tipo elem1 = pConj1->e;
         Tipo elem2 = pConj2->e;
-        int countAux = 0;
         Result resultadoElem = comparador(elem1, elem2);
 
         if (resultadoElem == EQUAL){
