@@ -1,4 +1,20 @@
 #include "conjunto.h"
+// TAD de conjuntos
+
+
+// observe que a função aqui, no mundo da aplicacao
+// sabe quem é Tipo e pode fazer a comparacao desejada
+// Ex: comparacao de nomes de alunos, de números, de precos de mercadorias etc
+Result compareTo(Tipo a, Tipo b){
+    if (a > b) return GT;
+    if (a == b) return EQUAL;
+    return LT;
+}
+
+void imprime(Tipo t){
+    printf("%i", t); // essa função sabe quem é Tipo, no caso, um inteiro
+}
+
 
 #ifdef WIN32
 unsigned char pegaLetra(){
