@@ -1,18 +1,31 @@
-#include "sets.h"
-// TAD de conjuntos
+#include "conjunto.h"
 
-
-// observe que a função aqui, no mundo da aplicacao
-// sabe quem é Tipo e pode fazer a comparacao desejada
-// Ex: comparacao de nomes de alunos, de números, de precos de mercadorias etc
-Result compareTo(Tipo a, Tipo b){
-    if (a > b) return GT;
-    if (a == b) return EQUAL;
-    return LT;
+#ifdef WIN32
+unsigned char pegaLetra(){
+    return getche();// = getchar();// no Linux
 }
 
+unsigned char ENTRA=13;
+
+void limpaTela(){
+    system("cls");// "clear" // no Linux
+}
+
+#elif LINUX
+unsigned char pegaLetra(){
+    return getchar();// no Linux
+}
+
+unsigned char ENTRA=10;
+
+void limpaTela(){
+    system("clear");// "clear" // no Linux
+}
+
+#endif // WIN32
+
 void imprime(Tipo t){
-    printf("%i", t); // essa função sabe quem é Tipo, no caso, um inteiro
+    printf("%i", t);
 }
 
 
@@ -53,6 +66,9 @@ void menu(){
     printf("\nSets:\n");
     int tamanho = sizeof(conjuntosExibidos)/sizeof(char);
     for (int i=0;i<tamanho;i++){
+        int total = 0;
+        setsNumberOfElements(conjuntosExibidos[i], &total);
+        printf("[%d]", total);
         setsPrint(conjuntosExibidos[i], imprime); // imprimir o conjunto
     }
     printf("\n\n");
@@ -66,7 +82,7 @@ void conjuntos(){
     setsCreate();
     menu();
     while (TRUE){
-        ch = getche();
+        ch = pegaLetra();
         if (ch == 'e'){
             break;
         } else if (((ch >= '0') && (ch <= '9')) || (ch == '.')){
@@ -83,6 +99,9 @@ void conjuntos(){
             menu();
         } else if (ch >= 'A' && ch <= 'Z'){
             conjuntoAtual = ch;
+        } else if (ch == 'r') {
+            //setsRemoveElement();
+            break;
         } else if (ch == 'c'){
             setsFreeSet(conjuntoAtual);
             menu();
