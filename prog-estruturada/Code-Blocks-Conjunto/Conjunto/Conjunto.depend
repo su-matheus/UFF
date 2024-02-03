@@ -1,11 +1,12 @@
 # depslib dependency file v1.0
-1699224042 source:/home/matheusfelipe/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/main.c
+1700092401 source:/home/matheusfelipe/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/main.c
 	"conjunto.h"
 
-1699224093 /home/matheusfelipe/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/conjunto.h
+1700092503 /home/matheusfelipe/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/conjunto.h
 	<stdio.h>
 	<stdlib.h>
 
+<<<<<<< HEAD
 1699234988 source:/home/atheus/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/main.c
 	"conjunto.h"
 
@@ -13,3 +14,8 @@
 	<stdio.h>
 	<stdlib.h>
 
+=======
+1700095121 source:/home/matheusfelipe/Code/uff/UFF/prog-estruturada/Code-Blocks-Conjunto/Conjunto/conjunto.c
+	"conjunto.h"
+
+>>>>>>> af8d6f978f4892d297fa826ba95bf93b09dd9694

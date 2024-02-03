@@ -11,6 +11,14 @@ Result compareTo(Tipo a, Tipo b){
     return LT;
 }
 
+<<<<<<< HEAD
+=======
+void imprime(Tipo t){
+    printf("%i", t); // essa função sabe quem é Tipo, no caso, um inteiro
+}
+
+
+>>>>>>> af8d6f978f4892d297fa826ba95bf93b09dd9694
 #ifdef WIN32
 unsigned char pegaLetra(){
     return getche();// = getchar();// no Linux

@@ -1,8 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+<<<<<<< HEAD
 #ifndef CONJUNTO_H_INCLUDED
 #define CONJUNTO_H_INCLUDED
+=======
+#ifndef SETS_H_INCLUDED
+#define SETS_H_INCLUDED
+
+
+>>>>>>> af8d6f978f4892d297fa826ba95bf93b09dd9694
 
 
 typedef int Tipo;
@@ -43,5 +50,9 @@ Logic setsFreeSet(char conj);
 Logic setsDestroy();
 
 
+<<<<<<< HEAD
 
 #endif // CONJUNTO_H_INCLUDED
+=======
+#endif // SETS_H_INCLUDED
+>>>>>>> af8d6f978f4892d297fa826ba95bf93b09dd9694
