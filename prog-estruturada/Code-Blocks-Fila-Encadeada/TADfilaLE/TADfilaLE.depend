@@ -11,3 +11,15 @@
 	<stdio.h>
 	<stdlib.h>
 
+1697810557 source:/home/atheus/Code/uff/UFF/prog-estruturada/Code-Blocks-Fila-Encadeada/TADfilaLE/Fila.c
+	"Fila.h"
+
+1697810557 /home/atheus/Code/uff/UFF/prog-estruturada/Code-Blocks-Fila-Encadeada/TADfilaLE/Fila.h
+	<stdio.h>
+	<stdlib.h>
+
+1697810557 source:/home/atheus/Code/uff/UFF/prog-estruturada/Code-Blocks-Fila-Encadeada/TADfilaLE/main.c
+	<stdio.h>
+	<stdlib.h>
+	"Fila.h"
+
