@@ -16,8 +16,8 @@ public class Inscription {
 	}
 	
 	@Id
-	public int getId() {return id;}
-	public void setId(int id) {this.id = id;}
+	public Integer getId() {return id;}
+	public void setId(Integer id) {this.id = id;}
 	
 	public Inscription getInscription() {return inscription;}
 	public void setInscription(Inscription inscription) {this.inscription = inscription;}
@@ -33,7 +33,7 @@ public class Inscription {
 	
 	@Override
 	public String toString() {
-		return "Inscription{id=" + id + ", Student=" + student.getName() + ", Score=" + score + "}";
+		return "Inscription{id= " + id + ", Student= " + student.getName() + ", Score= " + score + ", Class= " + clazz.getPeriod() + "." + clazz.getYear() + "}";
 	}
 
 }

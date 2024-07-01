@@ -40,13 +40,15 @@ public class ClazzMenu {
         		period = scanner.nextInt();
         		System.out.println("Enter professor ID of the class:");
         		int professorId= scanner.nextInt();
-        		professor = professorService.getProfessorById(professorId);
         		/*
         		String professorName = scanner.nextLine();
         		professor = professorService.getProfessorByName(professorName);
         		*/
+        		professor = professorService.getProfessorById(professorId);
         		clazz = new Clazz(year, period, professor);
         		clazzService.addClazz(clazz);
+        		professor.addClazz(clazz);
+        		
         		System.out.println("Class " + clazz.getId() + " added successfully!");
         		break;
         		

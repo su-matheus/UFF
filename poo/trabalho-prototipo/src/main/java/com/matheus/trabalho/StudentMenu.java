@@ -2,7 +2,8 @@ package com.matheus.trabalho;
 
 import java.util.List;
 import java.util.Scanner;
-
+import com.matheus.exception.*;
+import com.matheus.model.Inscription;
 import com.matheus.model.Student;
 import com.matheus.service.StudentService;
 
@@ -24,7 +25,8 @@ public class StudentMenu {
         	System.out.println("2. Update Student");
         	System.out.println("3. Delete Student");
         	System.out.println("4. List All Student");
-        	System.out.println("5. Back Menu");
+        	System.out.println("5. List Approved Students");
+        	System.out.println("6. Back Menu");
         	
         	int choice = scanner.nextInt();
         	scanner.nextLine();
@@ -35,11 +37,18 @@ public class StudentMenu {
 	        		name = scanner.nextLine();
 	        		System.out.println("Enter student email:");
 	        		email = scanner.nextLine();
+	        		
+	        		if (!InputHandler.isEmailValid(email)) {
+	        			System.out.println("Invalid Email. Email should follow the pattern 'user@email.com'.");
+	        			return;
+	        		} else if(!InputHandler.isUsernameValid(name)) {
+	        			System.out.println("Invalid Username. Username must contain at least 3 words.");
+	        			return;
+	        		}
 	        		student = new Student(name, email);
 	        		studentService.addStudent(student);
 	        		System.out.println("Student " + student.getId() + " added successfully!");
 	        		break;
-	        		
 	        		
 	        	case 2:
 	        		System.out.println("Insert student ID you intend to update:");
@@ -71,6 +80,18 @@ public class StudentMenu {
 	        		break;
 	        		
 	        	case 5:
+	        		List<Student> studentList = studentService.getAllStudents();
+	        		
+	        		for (Student currentStudent : studentList) {
+	        			for (Inscription inscription : currentStudent.getInscriptions()) {
+	        				if (inscription.getScore() >= 8) {
+	        					System.out.println("Student{name= " + currentStudent.getName() + ", score= " + inscription.getScore() + ", class=" + inscription.getClazz() + "}");
+	        				}
+	        			}
+	        		}
+	        		
+	        		break;
+	        	case 6:
 	        		//printMenu = false;
 	        		return;
 	        	default:

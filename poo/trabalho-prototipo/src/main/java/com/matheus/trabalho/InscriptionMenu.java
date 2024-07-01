@@ -38,14 +38,18 @@ public class InscriptionMenu {
         	case 1:
         		System.out.println("Enter student ID:");
         		int studentId = scanner.nextInt();
-        		System.out.println("Enter class class:");
+        		System.out.println("Enter class ID:");
         		int clazzId = scanner.nextInt();
         		System.out.println("Enter score inscription:");
         		int score = scanner.nextInt();
+        		
         		student = studentService.getStudent(studentId);
         		clazz = clazzService.getClazz(clazzId);
         		inscription = new Inscription(student, score, clazz);
         		inscriptionService.addInscription(inscription);
+        		student.addInscription(inscription);
+        		clazz.addInscription(inscription);
+        		
         		System.out.println("Inscription " + inscription.getId() + " added successfully!");
         		break;
         		

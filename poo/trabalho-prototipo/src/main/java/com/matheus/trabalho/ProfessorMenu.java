@@ -3,6 +3,7 @@ package com.matheus.trabalho;
 import java.util.List;
 import java.util.Scanner;
 
+import com.matheus.exception.InputHandler;
 import com.matheus.model.Professor;
 import com.matheus.service.ProfessorService;
 
@@ -34,10 +35,20 @@ public class ProfessorMenu {
 	        		name = scanner.nextLine();
 	        		System.out.println("Enter professor email:");
 	        		email = scanner.nextLine();
+	        		
+	        		if (!InputHandler.isEmailValid(email)) {
+	        			System.out.println("Invalid Email. Email should follow the pattern 'user@email.com'.");
+	        			return;
+	        		} else if(!InputHandler.isUsernameValid(name)) {
+	        			System.out.println("Invalid Username. Username must contain at least 3 words.");
+	        			return;
+	        		}
+	        		
 	        		professor = new Professor(name, email);
 	        		professorService.addProfessor(professor);
 	        		System.out.println("Professor " + professor.getId() + " added successfully!");
 	        		break;
+	        		
         		case 2:
         			System.out.println("Insert professor ID you intend to update:");
 	        		id = scanner.nextInt();
@@ -51,6 +62,7 @@ public class ProfessorMenu {
 		        		System.out.println("Professor updated successfully!");
 	        		}
 	        		break;
+	        		
 	        	case 3:
 	        		System.out.println("Insert professor ID you intend to delete:");
 	        		id = scanner.nextInt();
