@@ -1,11 +1,12 @@
 package com.matheus.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.matheus.util.Id;
 
-public class Student {
+public class Student implements Serializable {
 	private int id;
 	private String name;
 	private String email;
@@ -33,6 +34,6 @@ public class Student {
 	
 	@Override
 	public String toString() {
-		return "Student{id=" + id + ", name=" + name + ", email=" + email + ", inscriptions=" + getInscriptions() + "}";
+		return "Student{id= " + id + ", name= " + name + ", email= " + email + "}";
 	}
 }

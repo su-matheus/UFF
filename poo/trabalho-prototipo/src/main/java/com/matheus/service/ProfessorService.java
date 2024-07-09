@@ -3,6 +3,8 @@ package com.matheus.service;
 import java.util.List;
 
 import com.matheus.dao.ProfessorDAO;
+import com.matheus.exception.ObjectDoesntExist;
+import com.matheus.exception.ObjectWithAssociation;
 import com.matheus.model.Professor;
 import com.matheus.util.DAOFactory;
 
@@ -14,7 +16,12 @@ public class ProfessorService {
 	}
 	
 	public Professor getProfessor(Integer id) {
-		return professorDao.getById(id);
+		Professor professor = professorDao.getById(id);
+		if (professor == null) {
+			throw new ObjectDoesntExist("Professor doesn't exist!");
+		} else {
+			return professor;
+		}
 	}
 	
 	public Professor updateProfessorName(Professor oldName, String newName) {
@@ -22,9 +29,20 @@ public class ProfessorService {
 		return oldName;
 	}
 	
-	public void deleteProfessor(Integer id) {
-		Professor tempStudent = getProfessorById(id);
-		professorDao.remove(tempStudent.getId());
+	public Professor updateProfessorEmail(Professor professor, String newEmail) {
+		professor.setEmail(newEmail);
+		return professor;
+	}
+	
+	public Professor deleteProfessor(Integer id) {
+		Professor tempProfessor = getProfessor(id);
+		if (tempProfessor.getClazzes().isEmpty()) {
+			professorDao.remove(tempProfessor.getId());
+		} else {
+			throw new ObjectWithAssociation("Professor is associated with a class. Delete class first!");
+			//System.out.println("Professor is associated with a class. Delete class first!");
+		}
+		return tempProfessor;
 	}
 	
 	public Professor getProfessorById(int id) {

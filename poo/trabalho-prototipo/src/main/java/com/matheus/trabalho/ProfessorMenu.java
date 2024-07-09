@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.matheus.exception.InputHandler;
+import com.matheus.exception.ObjectDoesntExist;
+import com.matheus.exception.ObjectWithAssociation;
 import com.matheus.model.Professor;
 import com.matheus.service.ProfessorService;
 
@@ -52,22 +54,54 @@ public class ProfessorMenu {
         		case 2:
         			System.out.println("Insert professor ID you intend to update:");
 	        		id = scanner.nextInt();
-	        		professor = professorService.getProfessor(id);
 	        		
-	        		if(professor != null) {
-	        			System.out.println("Enter new professor name:");
-	        			name = scanner.nextLine();
-	        			professor = new Professor(name, professor.getEmail());
-	        			professorService.updateProfessorName(professor, name);
-		        		System.out.println("Professor updated successfully!");
+	        		try {
+	            		professor = professorService.getProfessor(id);
+	        			System.out.println("------------UPDATE PROFESSOR MENU-------------");
+	            		System.out.println("Type the option you intend to update:");
+	            		System.out.println("1. Update name:");
+	            		System.out.println("2. Update email:");
+	            		System.out.println("3. Back menu");
+	            		int option = scanner.nextInt();
+		        		scanner.nextLine();
+	            		
+	            		switch(option) {
+	            		case 1:
+	            			System.out.println("Type the new name:");
+	            			String newName = scanner.nextLine();
+	            			if(!InputHandler.isUsernameValid(newName)) {
+	    	        			System.out.println("Invalid Username. Username must contain at least 3 words.");
+	    	        			return;
+	    	        		}
+	            			professorService.updateProfessorName(professor, newName);
+	            			System.out.println("Name updated succesfully!");
+	            			break;
+	            			
+	            		case 2:
+	            			System.out.println("Type the new email:");
+	            			String newEmail = scanner.nextLine();
+	            			if (!InputHandler.isEmailValid(newEmail)) {
+	    	        			System.out.println("Invalid Email. Email should follow the pattern 'user@email.com'.");
+	    	        			return;
+	    	        		}
+	            			professorService.updateProfessorEmail(professor, newEmail);
+	            			System.out.println("Email updated succesfully!");
+	            			break;
+	            		}
+	        		} catch (ObjectDoesntExist e) {
+	        			System.out.println("\n" + e.getMessage());
 	        		}
 	        		break;
 	        		
 	        	case 3:
 	        		System.out.println("Insert professor ID you intend to delete:");
 	        		id = scanner.nextInt();
-	        		professorService.deleteProfessor(id);
-	        		System.out.println("Professor deleted successfully!");
+	        		try {
+		        		professorService.deleteProfessor(id);
+		        		System.out.println("Professor deleted successfully!");	        			
+	        		} catch (ObjectWithAssociation e) {
+	        			System.out.println("\n" + e.getMessage());
+	        		}
 	        		break;
 	        		
 	        	case 4:

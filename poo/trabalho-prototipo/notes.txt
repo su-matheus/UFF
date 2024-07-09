@@ -13,3 +13,30 @@
 7- No método getDAO no DAOFactory eu crio um objeto que deve retornar uma instância do DAO passado para dentro no parâmetro do método getDAO. No entanto, ao tentar criar essa instância com o código "DAOClass.getDeclaredConstructor().newInstance();" é retornado o erro "Unhandled exception type NoSuchMethodException" e sugere eu criar try/catch para implementar esse código. Ao fazer isso ele me retorna o catch com vários tipos de erros já implementados.
 
 8- Para fazer o resto do código além do Student que eu comecei fazendo eu só precisei criar o model, depois o DAO do model que eu estou implementando e já extendo o DAO genérico. Feito isso eu crio a classe de DAO Impl e me dará a opção de criar todos os métodos que esse impl pede. Criado a classe que implementa o DAO do model que eu estou criando eu uso esse DAO no service.
+
+9- No arquivo App.java o Eclipse me deu a recomendação de inserir ClassNotFoundException no try catch do método readData pois sem isso o método não funciona devido a classe ObjectInputStream.
+
+10- Não é possível salvar as informações passadas pelo programa dentro de um arquivo pois retorna um erro dizendo que as classes do arquivo model (Student, Professor,...) não são serializáveis.
+
+11- No método readData() no arquivo App.java eu inseri a annotation @SuppressWarnings("unchecked") pq me retornava erros de cast nos maps de cada classe do model.
+
+12- A leitura do arquivo de texto que é usado como banco de dados somente deu certo depois de eu inserir o Serializable em cada classe do model, colocar o contador nos métodos que fazem a leitura e escrita de dados no arquivo. Feito isso tudo eu tive que deletar e executar o programa denovo para salvar os dados corretamente dentro do arquivo de texto. Antes eu acho que estava dando erro pq o programa não reconhecia os dados dentro do arquivo de texto como sendo serializados.
+
+13- Ao criar a excetion personalizada ObjectWithAssociation() e usar dentro do service eu conseguia fazer funcionar no entanto ele jogava o erro com a mensagem personalizada e parava a aplicação. Isso foi corrigido colocando um try catch no menu onde tem a opção de deletar classe.
+
+14- Eu queria lançar um erro personalizado que extendesse ClassNotFoundException mas não deu certo pois quando eu utilizava esse erro personalizado dentro de um service retornava o erro "Unhandled exception type". Eu consertei isso usando RuntimeException.
+
+15- Não estava conseguindo usar enum como eu queria então passei a busca de uma enum usando a posição do atributo da enum em sua clase como parâmetro. Quando o usuário digita um número ele está passando a posição do array da enum.
+
+16- Passei a data direto para string no menu InscriptionMenu(). Assim a função setDate() no model Inscription() recebe como parâmetro uma string.
+
+
+--------------------SOLUÇÃO DOS ERROS--------------------
+Erro tópico 11/12- https://stackoverflow.com/questions/10907838/getting-notserializableexception-when-trying-to-write-object?rq=3
+
+Erro tópico 12- https://pt.stackoverflow.com/questions/3217/java-mostra-type-safety-unchecked-cast-from-object-to-hashmap
+
+Erro tópico 16- https://www.digitalocean.com/community/tutorials/java-simpledateformat-java-date-format
+
+
+

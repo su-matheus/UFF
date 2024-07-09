@@ -1,6 +1,5 @@
 package com.matheus.exception;
 
-import java.awt.TextField;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,5 +20,19 @@ public class InputHandler {
 		
 		//TextField usernameField = new TextField(username);
 		//usernameField.setP
+	}
+	
+	public static boolean isScoreValid(Integer score) {
+		String scoreRegex = "\\d{1,2}";
+		Pattern pattern = Pattern.compile(scoreRegex);
+		Matcher matcher = pattern.matcher(score.toString());
+		return matcher.matches();
+	}
+	
+	public static boolean isPeriodValid(Integer period) {
+		if (period > 2 || period < 1) {
+			return false;
+		}
+		return false;
 	}
 }

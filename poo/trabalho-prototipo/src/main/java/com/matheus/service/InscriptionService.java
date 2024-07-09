@@ -3,8 +3,12 @@ package com.matheus.service;
 import java.util.List;
 
 import com.matheus.dao.InscriptionDAO;
+import com.matheus.exception.ObjectDoesntExist;
+import com.matheus.exception.ObjectWithAssociation;
 import com.matheus.model.Inscription;
+import com.matheus.model.Inscription.Presence;
 import com.matheus.util.DAOFactory;
+
 
 public class InscriptionService {
 	InscriptionDAO inscriptionDao = DAOFactory.getDAO(InscriptionDAO.class);
@@ -14,18 +18,32 @@ public class InscriptionService {
 	}
 	
 	public Inscription getInscription(Integer id) {
-		return inscriptionDao.getById(id);//não sei se dará certo pois método get pede um objeto, talvez tenha que colocar id como Integer
+		Inscription inscription = inscriptionDao.getById(id);
+		if (inscription == null) {
+			throw new ObjectDoesntExist("Inscription doesn't exist!");
+		}
+		return inscription;
+		//return inscriptionDao.getById(id);//não sei se dará certo pois método get pede um objeto, talvez tenha que colocar id como Integer
 	}
 	
-	public Inscription updateScoreInscription(Inscription oldScore, Integer newScore) {
+	public Inscription updateScoreInscription(Inscription oldScore, double newScore) {
 		//studentDao.update(oldName);
 		oldScore.setScore(newScore);
 		return oldScore;
 	}
 	
+	public Inscription updatePresenceInscription (Inscription inscription, Presence newFrequency) {
+		inscription.setPresence(newFrequency);
+		return inscription;
+	}
+	
 	public void deleteInscription(Integer id) {
-		Inscription tempInscription = getInscriptionById(id);
-		inscriptionDao.remove(tempInscription.getId());
+		Inscription tempInscription = getInscription(id);
+		if (tempInscription.getClasses().isEmpty()) {
+			inscriptionDao.remove(tempInscription.getId());			
+		} else {
+			throw new ObjectWithAssociation("Inscription is associated with a class. Delete class first!");
+		}
 	}
 	
 	public Inscription getInscriptionById(int id) {

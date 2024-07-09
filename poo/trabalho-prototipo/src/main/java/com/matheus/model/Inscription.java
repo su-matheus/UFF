@@ -1,18 +1,43 @@
 package com.matheus.model;
 
+import java.io.Serializable;
+import java.text.NumberFormat;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.matheus.util.Id;
 
-public class Inscription {
+public class Inscription implements Serializable {
 	private int id;
 	private Inscription inscription;
 	private Student student;
-	private Clazz clazz;
 	private double score;
+	private Presence presence;
+	private String date;
+	private List<Clazz> classes;
 
-	public Inscription(Student student, double score, Clazz clazz) {
+	
+	public enum Presence  {
+	    SUFFICIENT("Sufficient"),
+	    UNSUFFICIENT("Unsufficient");
+		private final String presencePhrase;
+
+		Presence(String message) {
+			this.presencePhrase = message;
+		}
+		
+		public String getPhrase() {
+			return presencePhrase;
+		}
+	}
+
+
+	public Inscription(Student student, double score, Presence presence) {
 		this.student = student;
 		this.score = score;
-		this.clazz = clazz;
+		this.presence = presence;
+		this.classes = new ArrayList<>();
 	}
 	
 	@Id
@@ -24,16 +49,23 @@ public class Inscription {
 	
 	public Student getStudent() {return student;}
 	public void setStudent(Student student) {this.student= student;}
-	
-	public Clazz getClazz() {return clazz;}
-	public void setClazz(Clazz clazz) {this.clazz= clazz;}
-	
+		
 	public double getScore() {return score;}
 	public void setScore(double score) {this.score= score;}
 	
+	public Presence getPresence() {return presence;}
+	public void setPresence(Presence presence) {this.presence = presence;}
+	
+	public String getDate() {return date;}
+	public void setDate(String date) {this.date = date;}
+	
+	public List<Clazz> getClasses() {return classes;}
+	public void addClazz(Clazz clazz) {this.classes.add(clazz);}
+	public void removeClazz(Clazz clazz) {this.classes.remove(clazz);}
+
 	@Override
 	public String toString() {
-		return "Inscription{id= " + id + ", Student= " + student.getName() + ", Score= " + score + ", Class= " + clazz.getPeriod() + "." + clazz.getYear() + "}";
+		return "Inscription{id= " + id + ", Student= " + student.getName() + ", Score= " + score + ", presence= " + presence + ", date= " + getDate() + "}";
 	}
 
 }
