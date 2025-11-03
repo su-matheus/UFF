@@ -27,7 +27,8 @@ public class Professor {
     private String nome;
     private String slug;
     private String email;
-    @JsonIgnoreProperties("professor")
+//    @JsonIgnoreProperties("professor")
+    @JsonIgnore
     @OneToMany(mappedBy = "professor")
     private List<Turma> turma;
 

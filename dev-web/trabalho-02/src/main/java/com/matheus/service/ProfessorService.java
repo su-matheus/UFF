@@ -2,6 +2,7 @@ package com.matheus.service;
 
 import com.matheus.exception.EntidadeNaoEncontradaException;
 import com.matheus.model.Professor;
+import com.matheus.model.ProfessorDTO;
 import com.matheus.repository.ProfessorRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,15 @@ import java.util.List;
 public class ProfessorService {
     private final ProfessorRepository professorRepository;
 
-    public List<Professor> recuperarProfessores() {
-        return professorRepository.recuperarProfessores();
+    public List<ProfessorDTO> recuperarProfessores() {
+        return professorRepository.findAll()
+                .stream()
+                .map(p -> new ProfessorDTO(
+                        p.getId(),
+                        p.getNome(),
+                        p.getEmail()
+                ))
+                .toList();
     }
 
     public Professor cadastrarProfessor(Professor professor) {
@@ -30,13 +38,6 @@ public class ProfessorService {
         return professorRepository.save(professor);
     }
 
-//    public Professor recuperarProfessorPorIdComTurma(Long id) {
-//        // findById() retorna um Optional<T>
-//        return professorRepository.recuperarProfessorPorIdComTurma(id)
-//                .orElseThrow(() -> new EntidadeNaoEncontradaException(
-//                        "Professor com id= " + id + " não encontrado."
-//                ));
-//    };
 
     public Professor recuperarProfessorPorIdSemTurma(Long id) {
         return professorRepository.recuperarProfessorPorIdSemTurma(id)

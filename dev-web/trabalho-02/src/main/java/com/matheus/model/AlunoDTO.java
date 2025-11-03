@@ -1,4 +1,5 @@
 package com.matheus.model;
 
-public record AlunoDTO(Long id, String nome) {
+public record AlunoDTO(Long id, String nome, String email) {
+
 }

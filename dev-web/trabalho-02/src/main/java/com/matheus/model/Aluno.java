@@ -26,9 +26,9 @@ public class Aluno {
     private String nome;
     private String slug;
     private String email;
-//    @JsonIgnore
-    @JsonIgnoreProperties("aluno") // Em vez de @JsonIgnore
-    @OneToMany(mappedBy = "aluno")
+//    @JsonIgnoreProperties("aluno") // Em vez de @JsonIgnore
+    @JsonIgnore
+    @OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
     private List<Inscricao> inscricao;
 
 

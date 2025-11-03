@@ -1,4 +1,4 @@
 package com.matheus.model;
 
-public record ProfessorDTO(Long id, String nome) {
+public record ProfessorDTO(Long id, String nome, String email) {
 }

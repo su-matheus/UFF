@@ -20,7 +20,7 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @GetMapping
-    public List<Professor> recuperarProfessores() {
+    public List<ProfessorDTO> recuperarProfessores() {
         return professorService.recuperarProfessores();
     }
 
@@ -44,7 +44,7 @@ public class ProfessorController {
         }
         else {
             Professor professor = professorService.recuperarProfessorPorIdSemTurma(id);
-            ProfessorDTO professorDTO = new ProfessorDTO(professor.getId(), professor.getNome());
+            ProfessorDTO professorDTO = new ProfessorDTO(professor.getId(), professor.getNome(), professor.getEmail());
             System.out.println(professorDTO.id());
             return ResponseEntity.ok(professorDTO);
         }

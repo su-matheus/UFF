@@ -28,13 +28,13 @@ public class Inscricao {
     @CreationTimestamp
     private LocalDateTime dataHora;
 //    @JsonIgnore
-    @JsonIgnoreProperties("inscricao") // Evita recursão
+//    @JsonIgnoreProperties("inscricao") // Evita recursão
     @JoinColumn(name = "aluno_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Aluno aluno;
-    @JsonIgnore
+
     @JoinColumn(name = "turma_id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Turma turma;
 
 

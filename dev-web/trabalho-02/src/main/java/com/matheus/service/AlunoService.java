@@ -2,6 +2,7 @@ package com.matheus.service;
 
 import com.matheus.exception.EntidadeNaoEncontradaException;
 import com.matheus.model.Aluno;
+import com.matheus.model.AlunoDTO;
 import com.matheus.repository.AlunoRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +15,16 @@ import java.util.List;
 public class AlunoService {
     private final AlunoRepository alunoRepository;
 
-    public List<Aluno> recuperarAlunos() {
-        return alunoRepository.recuperarAlunos();
+    public List<AlunoDTO> recuperarAlunos() {
+//        return alunoRepository.recuperarAlunos();
+        return alunoRepository.findAll()
+                .stream()
+                .map(a -> new AlunoDTO(
+                        a.getId(),
+                        a.getNome(),
+                        a.getEmail()
+                ))
+                .toList();
     }
 
     public Aluno cadastrarAluno(Aluno aluno) {

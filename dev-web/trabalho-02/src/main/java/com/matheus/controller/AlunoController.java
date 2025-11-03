@@ -20,7 +20,7 @@ public class AlunoController {
     private AlunoService alunoService;
 
     @GetMapping
-    public List<Aluno> recuperarAlunos() {
+    public List<AlunoDTO> recuperarAlunos() {
         return alunoService.recuperarAlunos();
     }
 
@@ -63,7 +63,7 @@ public class AlunoController {
         }
         else {
             Aluno aluno = alunoService.recuperarAlunoPorIdSemInscricao(id);
-            AlunoDTO alunoDTO = new AlunoDTO(aluno.getId(), aluno.getNome());
+            AlunoDTO alunoDTO = new AlunoDTO(aluno.getId(), aluno.getNome(), aluno.getEmail());
             System.out.println(alunoDTO.id());
             return ResponseEntity.ok(alunoDTO);
 //            Produto produto = produtoService.recuperarProdutoPorIdSemCategoria(id);

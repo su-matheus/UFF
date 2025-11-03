@@ -14,7 +14,7 @@ public class Application implements CommandLineRunner {
     private final AlunoRepository alunoRepository;
     private final ProfessorRepository professorRepository;
     private final TurmaRepository turmaRepository;
-    private final InscricaoReposiroty inscricaoReposiroty;
+    private final InscricaoRepository inscricaoRepository;
 
     private final DisciplinaRepository disciplinaRepository;
 
@@ -41,34 +41,33 @@ public class Application implements CommandLineRunner {
         professorRepository.save(iruka);
 
 
-        Disciplina disciplina1 = new Disciplina("Bando de dados", "68H");
+        Disciplina disciplina1 = new Disciplina("Bando de dados", 68);
         disciplinaRepository.save(disciplina1);
 
-        Disciplina disciplina2 = new Disciplina("Programaçao orientada a objetos", "68H");
+        Disciplina disciplina2 = new Disciplina("Programaçao orientada a objetos", 68);
         disciplinaRepository.save(disciplina2);
 
-        Disciplina disciplina3 = new Disciplina("Calculo", "68H");
+        Disciplina disciplina3 = new Disciplina("Calculo", 68);
         disciplinaRepository.save(disciplina3);
 
-        Disciplina disciplina4 = new Disciplina("Computaçao e sociedade", "34H");
+        Disciplina disciplina4 = new Disciplina("Computaçao e sociedade", 34);
         disciplinaRepository.save(disciplina4);
 
 
 
-        Turma turma = new Turma(2025,"01",professor, disciplina2);
+        Turma turma = new Turma("A1", 2025,"01",professor, disciplina2);
         turmaRepository.save(turma);
 
-        Turma turma2 = new Turma(2025,"02",professor, disciplina4);
+        Turma turma2 = new Turma("B2", 2025,"02",professor, disciplina4);
         turmaRepository.save(turma2);
 
         Inscricao inscricaoNaruto = new Inscricao(naruto, turma);
-        inscricaoReposiroty.save(inscricaoNaruto);
+        inscricaoRepository.save(inscricaoNaruto);
 
         Inscricao inscricaoSakura = new Inscricao(sakura, turma);
-        inscricaoReposiroty.save(inscricaoSakura);
+        inscricaoRepository.save(inscricaoSakura);
 
         Inscricao inscricaoSakura2 = new Inscricao(sakura, turma2);
-        inscricaoReposiroty.save(inscricaoSakura2);
-
+        inscricaoRepository.save(inscricaoSakura2);
     }
 }
