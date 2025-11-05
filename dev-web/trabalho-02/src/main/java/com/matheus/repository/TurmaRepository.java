@@ -1,8 +1,6 @@
 package com.matheus.repository;
 
-import com.matheus.model.Professor;
-import com.matheus.model.Turma;
-import com.matheus.model.TurmaAlunoPaginadoDTO;
+import com.matheus.model.*;
 import jakarta.persistence.LockModeType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,7 +46,7 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
 
 
     @Query("""
-        SELECT new com.matheus.model.TurmaAlunoPaginadoDTO(
+        SELECT new com.matheus.model.TurmaListagemDTO(
             t.id,
             t.nome,
             t.ano,
@@ -61,7 +59,16 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
         JOIN t.disciplina d
         WHERE LOWER(t.nome) LIKE LOWER(:nome)
     """)
-    Page<TurmaAlunoPaginadoDTO> recuperarTurmasComPaginacao(Pageable pageable, @Param("nome") String nome);
+    Page<TurmaListagemDTO> recuperarTurmasComPaginacao(Pageable pageable, @Param("nome") String nome);
+
+
+    @Query("""
+        SELECT new com.matheus.model.AlunoDTO(a.id, a.nome, a.email)
+        FROM Inscricao i
+        JOIN i.aluno a
+        WHERE i.turma.id = :turmaId
+    """)
+    List<AlunoDTO> buscarAlunosPorTurma(@Param("turmaId") Long turmaId);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select t from Turma t where t.id = :id")

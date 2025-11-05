@@ -1,6 +1,7 @@
 package com.matheus.controller;
 
 import com.matheus.model.*;
+import com.matheus.service.AlunoService;
 import com.matheus.service.TurmaService;
 
 import lombok.RequiredArgsConstructor;
@@ -20,6 +21,7 @@ import java.util.List;
 public class TurmaController {
     @Autowired
     private final TurmaService turmaService;
+    private final AlunoService alunoService;
 
     @GetMapping
     public List<TurmaDTO> recuperarTurmas() {
@@ -34,7 +36,7 @@ public class TurmaController {
             @RequestParam(name = "nome", defaultValue = "") String nome
     ) {
         Pageable pageable = PageRequest.of(pagina, tamanho);
-        Page<TurmaAlunoPaginadoDTO> page = turmaService.recuperarTurmasPaginadas(pageable, nome);
+        var page = turmaService.recuperarTurmaComAlunos(pageable, nome);
         return new ResultadoPaginado<>(
                 page.getTotalElements(),
                 page.getTotalPages(),
@@ -43,13 +45,10 @@ public class TurmaController {
         );
     }
 
-//    @GetMapping("/{id}")
-//    public ResponseEntity<TurmaAlunoPaginadoDTO> buscarPorIdComAlunosPaginados(
-//            @PathVariable Long id,
-//            Pageable pageable) {
-//        TurmaAlunoPaginadoDTO dto = turmaService.buscarPorIdComAlunosPaginados(id, pageable);
-//        return ResponseEntity.ok(dto);
-//    }
+    @GetMapping("/{id}/alunos")
+    public List<AlunoDTO> listarAlunosDaTurma(@PathVariable Long id) {
+        return alunoService.recuperarPorTurma(id);
+    }
 
 
     @PostMapping

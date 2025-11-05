@@ -14,6 +14,19 @@ import java.util.Optional;
 public interface AlunoRepository extends JpaRepository<Aluno, Long> {
     List<Aluno> findByNome(String nome);
 
+//        SELECT a
+//        FROM Aluno a
+//        JOIN a.inscricoes i
+//        WHERE i.turma.id = :turmaId
+
+    @Query("""        
+        SELECT a
+        FROM Aluno a
+        LEFT OUTER JOIN FETCH a.inscricao i
+        WHERE i.turma.id = :turmaId
+    """)
+    List<Aluno> findByTurmaId(@Param("turmaId") Long turmaId);
+
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select a from Aluno a where a.id = :id")
     Optional<Aluno> recuperarAlunoPorIdComLock(@Param("id") Long id);

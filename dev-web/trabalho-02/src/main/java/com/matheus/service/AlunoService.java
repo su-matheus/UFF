@@ -40,6 +40,20 @@ public class AlunoService {
         return alunoRepository.save(aluno);
     }
 
+
+    public List<AlunoDTO> recuperarPorTurma(Long turmaId) {
+        List<Aluno> alunos = alunoRepository.findByTurmaId(turmaId);
+
+        return alunos.stream()
+                .map(a -> new AlunoDTO(
+                        a.getId(),
+                        a.getNome(),
+                        a.getEmail()
+                ))
+                .toList();
+    }
+
+
     public Aluno recuperarAlunoPorIdComInscricao(Long id) {
         // findById() retorna um Optional<T>
 //        return alunoRepository.recuperarAlunoPorIdComInscricao(id)

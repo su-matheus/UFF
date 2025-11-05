@@ -9,6 +9,7 @@ import com.matheus.repository.ProfessorRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +24,6 @@ public class TurmaService {
     private final InscricaoRepository inscricaoRepository;
 
     public List<TurmaDTO> recuperarTurmas() {
-//        return turmaRepository.recuperarTurmas();
         return turmaRepository.findAll()
                 .stream()
                 .map(t -> new TurmaDTO(
@@ -33,20 +33,46 @@ public class TurmaService {
                         t.getPeriodo(),
                         t.getProfessor(),
                         t.getDisciplina()
-//                        t.getProfessor().getId(),
-//                        t.getDisciplina().getId()
                 ))
                 .toList();
     }
+
+
+    public Page<TurmaListagemDTO> recuperarTurmasPaginadas(Pageable pageable, String nome){
+        return turmaRepository.recuperarTurmasComPaginacao(pageable, "%" + nome + "%");
+    }
+
+    public Page<TurmaAlunoPaginadoDTO> recuperarTurmaComAlunos(Pageable pageable, String nome) {
+        Page<TurmaListagemDTO> turmasPge = turmaRepository.recuperarTurmasComPaginacao(pageable, nome);
+
+        List<TurmaAlunoPaginadoDTO> turmaComAlunos = turmasPge
+                .stream()
+                .map(turma -> {
+                    List<AlunoDTO> alunos = turmaRepository.buscarAlunosPorTurma(turma.id());
+                    return new TurmaAlunoPaginadoDTO(
+                            turma.id(),
+                            turma.nome(),
+                            turma.ano(),
+                            turma.periodo(),
+                            turma.professor(),
+                            turma.disciplina(),
+                            alunos
+                    );
+                })
+                .toList();
+        return new PageImpl<>(turmaComAlunos, pageable, turmasPge.getTotalElements());
+    }
+
+
 //    @Transactional
-//    public TurmaAlunoPaginadoDTO buscarPorIdComAlunosPaginados(Long id, Pageable pageable) {
+//    public TurmaAlunoPaginadoDTO recuperarPorIdTurmaComAlunos(Long id, Pageable pageable) {
 //        Turma turma = turmaRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException(String.format("Turma com id"+ id + "não encontrada")));
+//                .orElseThrow(() -> new RuntimeException(String.format("Turma com id %d não encontrada", id)));
 //
 ////        Page<Inscricao> paginaDeInscricoes = inscricaoRepository.findByTurmaId(id, pageable);
-//        Page<Inscricao> paginaInscricoes = inscricaoRepository.findTurmaById(id, pageable);
+//        Page<Inscricao> paginaDeInscricoes = inscricaoRepository.findTurmaById(id, pageable);
 //
-//        Page<AlunoResponseDTO> paginaDeAlunosDTO = paginaDeInscricoes
+//        Page<AlunoDTO> paginaDeAlunos = paginaDeInscricoes
 //                .map(inscricao -> modelMapper.criarAlunoResponseDTO(inscricao.getAluno()));
 //
 //        return new TurmaResponseComAlunosPaginadosDTO(
@@ -58,10 +84,6 @@ public class TurmaService {
 //                paginaDeAlunosDTO
 //        );
 //    }
-
-    public Page<TurmaAlunoPaginadoDTO> recuperarTurmasPaginadas(Pageable pageable, String nome){
-        return turmaRepository.recuperarTurmasComPaginacao(pageable, "%" + nome + "%");
-    }
 
     @Transactional
     public Turma cadastrarTurma(TurmaDTO turmaDTO){
