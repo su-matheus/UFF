@@ -4,8 +4,9 @@ import Home from "../pages/Home"
 import ListarAlunos from "../pages/ListarAlunos";
 import ListarProfessores from "../pages/ListarProfessores";
 import ListarTurmas from "../pages/ListarTurmas";
-import ListarTurmaDetalhada from "../pages/ListarTurmaDetalhada";
+// import ListarTurmaDetalhada from "../pages/ListarTurmaDetalhada";
 import ListarTurmaPaginada from "../pages/ListarTurmaPaginada";
+import ListarTurmaComAlunos from "../pages/ListarTurmaAlunos";
 
 const router = createBrowserRouter([
     {
@@ -16,8 +17,8 @@ const router = createBrowserRouter([
             { path: "alunos", element: <ListarAlunos/> },
             { path: "professores", element: <ListarProfessores/>},
             { path: "turmas", element: <ListarTurmas/>},
-            { path: "turma-detalhada", element: <ListarTurmaDetalhada />},
-            { path: "turma-paginada", element: <ListarTurmaPaginada />}
+            { path: "turma-paginada", element: <ListarTurmaPaginada />},
+            { path: "turma-alunos", element: <ListarTurmaComAlunos />}
         ]
     }
 ])

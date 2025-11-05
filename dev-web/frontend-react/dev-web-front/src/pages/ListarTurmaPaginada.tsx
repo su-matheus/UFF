@@ -1,6 +1,5 @@
 import { useState } from "react";
 import TabelaDeTurmas from "../components/TabelaDeTurmas";
-// import useRecuperarTurmaComPaginacao from "../hooks/useBuscaTurmaPaginada";
 import useBuscaTurmaPaginacao from "../hooks/useBuscaTurmaPaginada";
 import type { Turma } from "../interfaces/Turma";
 import Paginacao from "../components/Paginacao";
@@ -21,15 +20,6 @@ const ListarTurmaPaginada = () => {
                                         tamanho: tamanho.toString(),
                                         nome: nome});
 
-  // const {
-  //   mutate: removerProduto,
-  //   // isPending: removendoProduto,
-  //   error: errorRemocaoProduto} = useRemoverProdutoPorId(); 
-
-//   const tratarRemocao = (id: number) => {
-//     removerProduto(id);
-//     setPagina(0);
-//   };
 
   const tratarPesquisa = (nome: string) => {
     setNome(nome);
@@ -41,9 +31,7 @@ const ListarTurmaPaginada = () => {
   };
 
   if (errorBuscarTurmaComPaginacao) throw errorBuscarTurmaComPaginacao;
-  // if (errorRemocaoProduto) throw errorRemocaoProduto;
   if (recuperandoTurmaComPaginacao) return <p>Recuperando turma...</p>;
-  // if (removendoProduto) return <p>Removendo um produto...</p>;
 
   const turmas: Turma[] = resultadoPaginado.itens;
   const totalDePaginas: number = resultadoPaginado.totalDePaginas;
