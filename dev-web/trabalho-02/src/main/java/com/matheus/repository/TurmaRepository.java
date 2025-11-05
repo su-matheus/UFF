@@ -48,14 +48,20 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
 
 
     @Query("""
-       SELECT t.id, t.nome, t.ano, t.periodo,
-              p.id, p.nome,
-              d.id, d.nome
-       FROM Turma t
-       JOIN t.professor p
-       JOIN t.disciplina d
-       """)
-    Page<Turma> recuperarTurmasComPaginacao(Pageable pageable,  @Param("nome") String nome);
+        SELECT new com.matheus.model.TurmaAlunoPaginadoDTO(
+            t.id,
+            t.nome,
+            t.ano,
+            t.periodo,
+            p.nome,
+            d.nome
+        )
+        FROM Turma t
+        JOIN t.professor p
+        JOIN t.disciplina d
+        WHERE LOWER(t.nome) LIKE LOWER(:nome)
+    """)
+    Page<TurmaAlunoPaginadoDTO> recuperarTurmasComPaginacao(Pageable pageable, @Param("nome") String nome);
 
     @Lock(LockModeType.PESSIMISTIC_WRITE)
     @Query("select t from Turma t where t.id = :id")

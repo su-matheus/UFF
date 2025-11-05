@@ -28,14 +28,14 @@ public class TurmaController {
 
     // http://localhost:8080/produtos/paginacao?pagina=0&tamanho=5
     @GetMapping("paginacao")
-    public ResultadoPaginado<Turma> recuperarTurmasComPaginacao(
+    public ResultadoPaginado<TurmaAlunoPaginadoDTO> recuperarTurmasComPaginacao(
             @RequestParam(name = "pagina", defaultValue = "0") int pagina,
             @RequestParam(name = "tamanho", defaultValue = "5") int tamanho,
             @RequestParam(name = "nome", defaultValue = "") String nome
     ) {
         Pageable pageable = PageRequest.of(pagina, tamanho);
-        Page<Turma> page = turmaService.recuperarTurmasPaginadas(pageable, nome);
-        return new ResultadoPaginado<Turma>(
+        Page<TurmaAlunoPaginadoDTO> page = turmaService.recuperarTurmasPaginadas(pageable, nome);
+        return new ResultadoPaginado<>(
                 page.getTotalElements(),
                 page.getTotalPages(),
                 page.getNumber(),

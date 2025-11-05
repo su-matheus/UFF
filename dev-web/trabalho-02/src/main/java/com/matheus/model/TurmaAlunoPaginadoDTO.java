@@ -7,7 +7,7 @@ public record TurmaAlunoPaginadoDTO (
         String nome,
         int ano,
         String periodo,
-        ProfessorDTO professor,
-        DisciplinaDTO disciplina,
-        Page<AlunoDTO> alunos
+        String professor,
+        String disciplina
+//        Page<AlunoDTO> alunos
 ){ }

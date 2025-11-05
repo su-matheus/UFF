@@ -59,7 +59,7 @@ public class TurmaService {
 //        );
 //    }
 
-    public Page<Turma> recuperarTurmasPaginadas(Pageable pageable, String nome){
+    public Page<TurmaAlunoPaginadoDTO> recuperarTurmasPaginadas(Pageable pageable, String nome){
         return turmaRepository.recuperarTurmasComPaginacao(pageable, "%" + nome + "%");
     }
 
