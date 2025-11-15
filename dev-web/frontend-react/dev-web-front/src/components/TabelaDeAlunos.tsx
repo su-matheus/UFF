@@ -1,10 +1,48 @@
+import { useEffect, useState } from "react";
 import type { Aluno } from "../interfaces/Aluno";
 
 interface Props {
-  alunos: Aluno[];
+  alunos: Aluno[]
+  codigoTurma: string | null
 }
 
-  const TabelaDeAlunos = ({alunos} : Props) => {
+  const TabelaDeAlunos = ({alunos, codigoTurma} : Props) => {
+    const [grupoAlunos, setGrupoAlunos] = useState<Aluno[]>([])
+
+    useEffect(() => {
+      if (codigoTurma){
+        const grupoSalvo = localStorage.getItem(codigoTurma)
+        if (grupoSalvo) {
+          setGrupoAlunos(JSON.parse(grupoSalvo))
+        } else {
+          setGrupoAlunos([])
+        }
+      }
+    }, [codigoTurma])
+
+    const salvarLocalStorage = (novosAlunos: Aluno[]) =>{
+      if (codigoTurma) {
+        localStorage.setItem(codigoTurma, JSON.stringify(novosAlunos))
+      }
+    }
+
+    const botaoAlunoGrupo = (aluno: Aluno) => {
+      const jaIncluido = grupoAlunos.some((a) => a.id === aluno.id)
+      let novosAlunos : Aluno[]
+
+      if (jaIncluido) {
+        novosAlunos = grupoAlunos.filter((a) => a.id !== aluno.id)
+      } else {
+        novosAlunos = [...grupoAlunos, aluno]
+      }
+
+      setGrupoAlunos(novosAlunos)
+      salvarLocalStorage(novosAlunos)
+    }
+
+    const estaNoGrupo = (alunoId: number) => 
+      grupoAlunos.some((a) => a.id === alunoId)
+    
 
   return (
     <div className="table-responsive">
@@ -14,6 +52,7 @@ interface Props {
             <th className="text-center align-middle">Id</th>
             <th className="text-center align-middle">Nome</th>
             <th className="text-center align-middle">Email</th>
+            <th className="text-center align-middle">Ação</th>
           </tr>
         </thead>
         <tbody>
@@ -26,9 +65,21 @@ interface Props {
           ) : (
             alunos.map((aluno) => (
               <tr key={aluno.id}>
-                <td className="p-2 border">{aluno.id}</td>
-                <td className="p-2 border">{aluno.nome}</td>
-                <td className="p-2 border">{aluno.email}</td>
+                <td className="text-center align-middle">{aluno.id}</td>
+                <td className="text-center align-middle">{aluno.nome}</td>
+                <td className="text-center align-middle">{aluno.email}</td>
+                <td className="text-center align-middle">
+                  <button
+                    className= {`btn btn-sm ${
+                      estaNoGrupo(aluno.id)
+                        ? "btn-danger"
+                        : "btn-success"
+                    }`}
+                    onClick={()=> botaoAlunoGrupo(aluno)}
+                  >
+                    {estaNoGrupo(aluno.id) ? "Remover" : "Incluir"}
+                  </button>
+                </td>
               </tr>
             ))
           )}

@@ -1,21 +1,23 @@
 import { useState } from "react";
-import useTurmas from "../hooks/useTurmas";
-import useAlunosPorTurma from "../hooks/useAlunosPorTurma";
+import useRecuperarAlunosTurma from "../hooks/useAlunosPorTurma";
+import useRecuperarTurmas from "../hooks/useTurmas";
+import type { Turma } from "../interfaces/Turma";
 import Selecao from "../components/Selecao";
 import TabelaDeAlunos from "../components/TabelaDeAlunos";
 
 const ListarTurmaComAlunos = () => {
-  const [turmaSelecionadaId, setTurmaSelecionadaId] = useState<number | null>(null);
+  const [turmaSelecionada, setTurmaSelecionada] = useState<Turma | null>(null);
 
   const { data: turmas,
     isLoading: carregandoTurmas,
     error: erroTurmas 
-  } = useTurmas();
+  } = useRecuperarTurmas();
+
   const {
     data: alunos,
     isLoading: carregandoAlunos,
     error: erroAlunos,
-  } = useAlunosPorTurma(turmaSelecionadaId);
+  } = useRecuperarAlunosTurma(turmaSelecionada?.id ?? null);
 
   if (carregandoTurmas) return <p>Carregando turmas...</p>;
   if (erroTurmas) throw erroTurmas;
@@ -27,15 +29,21 @@ const ListarTurmaComAlunos = () => {
       {turmas && (
         <Selecao
           turmas={turmas}
-          turmaSelecionadaId={turmaSelecionadaId}
-          onSelecionarTurma={setTurmaSelecionadaId}
+          turmaSelecionadaId={turmaSelecionada?.id ?? null}
+          onSelecionarTurma={(id) => {
+            const turma = turmas.find((t) => t.id === id) || null
+            setTurmaSelecionada(turma)
+          }}
         />
       )}
 
-      {carregandoAlunos && turmaSelecionadaId && <p>Carregando alunos...</p>}
+      {carregandoAlunos && turmaSelecionada && <p>Carregando alunos...</p>}
       {erroAlunos && <p>Erro ao carregar alunos.</p>}
 
-      <TabelaDeAlunos alunos={alunos || []} />
+      <TabelaDeAlunos
+        alunos= {alunos || []}
+        codigoTurma={turmaSelecionada?.nome || null}  
+      />
     </div>
   );
 };

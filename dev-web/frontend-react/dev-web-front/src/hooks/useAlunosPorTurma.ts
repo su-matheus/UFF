@@ -1,18 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import type { Aluno } from "../interfaces/Aluno";
 
 
-const useAlunosPorTurma = (turmaId : number | null) => {
-  return useQuery<Aluno[]>({
-    queryKey: ["alunos", turmaId],
-    queryFn: async () => {
-      if (!turmaId) return []
-      const { data } = await axios.get(`http://localhost:8080/turmas/${turmaId}/alunos`)
-      return data
-    },
-    enabled: !!turmaId
-  });
+const recuperarAlunosTurma = async (turmaId : number | null) => {
+  const resposta = await fetch(`http://localhost:8080/turmas/${turmaId}/alunos`)
+  if (!resposta.ok) {
+    throw new Error(
+      "Ocorreu um erro ao recuperar alunos dessa turma. Status code: " + resposta.status
+    )
+  }
+  return await resposta.json()
 }
 
-export default useAlunosPorTurma
+const useRecuperarAlunosTurma = (turmaId : number | null) => {
+  return useQuery<Aluno[]>({
+    queryKey: ["alunos", turmaId],
+    queryFn: () => recuperarAlunosTurma(turmaId),
+    enabled: !!turmaId
+  })
+}
+
+
+export default useRecuperarAlunosTurma

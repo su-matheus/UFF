@@ -1,14 +1,24 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
 import type { Turma } from "../interfaces/Turma";
 
 
-export default function useTurmas() {
+const recuperarTurmas = async () => {
+  const resposta = await fetch("http://localhost:8080/turmas")
+  if (!resposta.ok) {
+    throw new Error(
+      "Ocorreu um erro ao recuperar turmas. Status code: " + resposta.status
+    )
+  }
+  return await resposta.json()
+}
+
+
+const useRecuperarTurmas = () => {
   return useQuery<Turma[]>({
     queryKey: ["turmas"],
-    queryFn: async () => {
-      const { data } = await axios.get("http://localhost:8080/turmas");
-      return data;
-    },
-  });
+    queryFn: () => recuperarTurmas(),
+    staleTime: 10_000,
+  })
 }
+
+export default useRecuperarTurmas

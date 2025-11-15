@@ -4,7 +4,7 @@ import type { Professor } from "./Professor"
 
 export interface Turma {
   id: number
-  nome: String
+  nome: string
   ano: number
   periodo: string
   professor: Professor
