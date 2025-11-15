@@ -16,7 +16,6 @@ public class AlunoService {
     private final AlunoRepository alunoRepository;
 
     public List<AlunoDTO> recuperarAlunos() {
-//        return alunoRepository.recuperarAlunos();
         return alunoRepository.findAll()
                 .stream()
                 .map(a -> new AlunoDTO(
@@ -33,7 +32,6 @@ public class AlunoService {
 
     @Transactional
     public Aluno alterarAluno(Aluno aluno) {
-        // Aqui (recuperarProdutoPorIdComLock) retorna um Optional<Produto>
         alunoRepository.recuperarAlunoPorIdComLock(aluno.getId())
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
                         "Aluno com id = " + aluno.getId() + " não encontrado."));
@@ -55,11 +53,6 @@ public class AlunoService {
 
 
     public Aluno recuperarAlunoPorIdComInscricao(Long id) {
-        // findById() retorna um Optional<T>
-//        return alunoRepository.recuperarAlunoPorIdComInscricao(id)
-//                .orElseThrow(() -> new EntidadeNaoEncontradaException(
-//                        "Aluno com id= " + id + " não encontrado."
-//                ));
         Aluno aluno = alunoRepository.findById(id)
                 .orElseThrow(() -> new EntidadeNaoEncontradaException(
                         "Aluno com id = " + id + " não encontrado."));
@@ -77,12 +70,6 @@ public class AlunoService {
                         "Produto com id = " + id + " não encontrado."));
     }
 
-
-//    public Aluno recuperarAlunoPorId(Long id) {
-//    return alunoRepository.recuperarAlunoPorIdComLock(id)
-//            .orElseThrow(() -> new EntidadeNaoEncontradaException(
-//                    "Aluno com id = " + id + " não encontrado."));
-//    }
 
     public void removerAlunoPorId(Long id){
         alunoRepository.deleteById(id);

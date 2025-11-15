@@ -64,26 +64,6 @@ public class TurmaService {
     }
 
 
-//    @Transactional
-//    public TurmaAlunoPaginadoDTO recuperarPorIdTurmaComAlunos(Long id, Pageable pageable) {
-//        Turma turma = turmaRepository.findById(id)
-//                .orElseThrow(() -> new RuntimeException(String.format("Turma com id %d não encontrada", id)));
-//
-////        Page<Inscricao> paginaDeInscricoes = inscricaoRepository.findByTurmaId(id, pageable);
-//        Page<Inscricao> paginaDeInscricoes = inscricaoRepository.findTurmaById(id, pageable);
-//
-//        Page<AlunoDTO> paginaDeAlunos = paginaDeInscricoes
-//                .map(inscricao -> modelMapper.criarAlunoResponseDTO(inscricao.getAluno()));
-//
-//        return new TurmaResponseComAlunosPaginadosDTO(
-//                turma.getId(),
-//                turma.getAno(),
-//                turma.getPeriodo(),
-//                modelMapper.criarProfessorResponseDTO(turma.getProfessor()),
-//                modelMapper.criarDisciplinaDTO(turma.getDisciplina()),
-//                paginaDeAlunosDTO
-//        );
-//    }
 
     @Transactional
     public Turma cadastrarTurma(TurmaDTO turmaDTO){

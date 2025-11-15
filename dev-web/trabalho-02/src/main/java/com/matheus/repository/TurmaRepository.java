@@ -16,34 +16,6 @@ public interface TurmaRepository extends JpaRepository<Turma, Long> {
     @Query(value = "select * from Turma", nativeQuery = true)
     List<Turma> recuperarTurmas();
 
-//    @Query("""
-//            SELECT DISTINCT t FROM Turma t
-//            LEFT JOIN FETCH t.inscricoes i
-//            LEFT JOIN FETCH i.aluno a
-//            LEFT JOIN FETCH t.professor p
-//            LEFT JOIN FETCH t.disciplina d
-//            WHERE t.id = :id
-//            """)
-//    Optional<Turma> recuperarPorIdComDetalhes(@Param("id") Long id);
-//
-//    Page<Turma> findByDisciplinaNomeContainingIgnoreCase(String nomeDisciplina, Pageable pageable);
-
-
-//    @Query("""
-//        SELECT new com.matheus.model.TurmaAlunoPaginadoDTO(
-//            t.id,
-//            t.nome,
-//            t.ano,
-//            t.periodo,
-//            p.nome,
-//            d.nome
-//        )
-//        FROM Turma t
-//        JOIN t.professor p
-//        JOIN t.disciplina d
-//    """)
-//    Page<TurmaAlunoPaginadoDTO> recuperarTurmasComPaginacao(Pageable pageable);
-
 
     @Query("""
         SELECT new com.matheus.model.TurmaListagemDTO(

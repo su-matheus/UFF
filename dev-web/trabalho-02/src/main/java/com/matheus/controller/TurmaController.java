@@ -28,6 +28,11 @@ public class TurmaController {
         return turmaService.recuperarTurmas();
     }
 
+    @GetMapping("/{id}/alunos")
+    public List<AlunoDTO> listarAlunosDaTurma(@PathVariable Long id) {
+        return alunoService.recuperarPorTurma(id);
+    }
+
     // http://localhost:8080/produtos/paginacao?pagina=0&tamanho=5
     @GetMapping("paginacao")
     public ResultadoPaginado<TurmaAlunoPaginadoDTO> recuperarTurmasComPaginacao(
@@ -43,11 +48,6 @@ public class TurmaController {
                 page.getNumber(),
                 page.getContent()
         );
-    }
-
-    @GetMapping("/{id}/alunos")
-    public List<AlunoDTO> listarAlunosDaTurma(@PathVariable Long id) {
-        return alunoService.recuperarPorTurma(id);
     }
 
 
