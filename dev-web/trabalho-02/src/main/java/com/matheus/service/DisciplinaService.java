@@ -2,10 +2,12 @@ package com.matheus.service;
 
 import com.matheus.model.Disciplina;
 import com.matheus.model.DisciplinaDTO;
+import com.matheus.model.DisciplinaTurmaDTO;
 import com.matheus.repository.DisciplinaRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -22,6 +24,19 @@ public class DisciplinaService {
                         d.getId(),
                         d.getNome(),
                         d.getCargaHoraria()
+                ))
+                .toList();
+    }
+
+    public List<DisciplinaTurmaDTO> recuperarPorTurma(Long turmaId) {
+        List<Disciplina> disciplinas = disciplinaRepository.findByTurmaId(turmaId);
+
+        return disciplinas.stream()
+                .map(d -> new DisciplinaTurmaDTO(
+                        d.getId(),
+                        d.getNome(),
+                        d.getCargaHoraria(),
+                        d.getTurma()
                 ))
                 .toList();
     }

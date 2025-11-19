@@ -1,9 +1,6 @@
 package com.matheus.controller;
 
-import com.matheus.model.Disciplina;
-import com.matheus.model.DisciplinaDTO;
-import com.matheus.model.Turma;
-import com.matheus.model.TurmaDTO;
+import com.matheus.model.*;
 import com.matheus.service.DisciplinaService;
 import com.matheus.service.TurmaService;
 import lombok.RequiredArgsConstructor;
@@ -20,10 +17,17 @@ import java.util.List;
 public class DisciplinaController {
     @Autowired
     private final DisciplinaService disciplinaService;
+    private final TurmaService turmaService;
 
     @GetMapping
     public List<DisciplinaDTO> recuperarDisciplinas() {
         return disciplinaService.recuperarDisciplinas();
+    }
+
+    @GetMapping("/{id}/turmas")
+    public List<DisciplinaTurmaDTO> recuperarPorTurma(@PathVariable Long id) {
+//        return turmaService.recuperaPorDisciplina();
+        return disciplinaService.recuperarPorTurma(id);
     }
 
     @PostMapping
